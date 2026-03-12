@@ -561,6 +561,7 @@ h+='<p class="chapter-intro">Download logo files and brand assets directly. SVGs
 
 h+='<h3>Logo Files</h3>';
 h+='<div class="spec-grid">';
+var svgNames=['lockup-light','lockup-dark','icon-only-light','icon-only-dark','lockup-mono-black','lockup-mono-white'];
 ['Lockup — Light','Lockup — Dark','Icon Only','Icon on Midnight','Mono Black','Mono White'].forEach(function(name,i){
   h+='<div class="spec-card"><div class="spec-card-body" id="dl-'+i+'" style="background:'+(i===1||i===3||i===5?M:W)+'">';
   if(i===0)h+=lockup(40,20,false);
@@ -569,7 +570,9 @@ h+='<div class="spec-grid">';
   if(i===3)h+=icon(48,true);
   if(i===4)h+=lockupMono(40,20,M);
   if(i===5)h+=lockupMono(40,20,W);
-  h+='</div><div class="spec-card-label" style="display:flex;justify-content:space-between;align-items:center">'+name+'<button class="copy-btn" onclick="dlSVG('+i+')">Download SVG</button></div></div>';
+  var svgData=getLogoSVGString(i);
+  var dataUri='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svgData);
+  h+='</div><div class="spec-card-label" style="display:flex;justify-content:space-between;align-items:center">'+name+'<a href="'+dataUri+'" download="latamscalers-'+svgNames[i]+'.svg" class="copy-btn" style="text-decoration:none;display:inline-block">Download SVG</a></div></div>';
 });
 h+='</div>';
 
@@ -647,9 +650,11 @@ function dlSVG(i){
 function buildFaviconLinks(){
   var container=document.getElementById('fav-links');
   container.innerHTML='<span style="font-size:11px;color:#94A3B8">Generating...</span>';
+  var svgFavicon='<?xml version="1.0" encoding="UTF-8"?><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 42 48" width="42" height="48"><defs><linearGradient id="g" x1="0" y1="1" x2="0" y2="0"><stop offset="0%" stop-color="#CBD5E1"/><stop offset="100%" stop-color="#5EEAD4"/></linearGradient></defs><rect x="2" y="36" width="10" height="10" rx="3" fill="#CBD5E1"/><rect x="15" y="22" width="10" height="18" rx="3" fill="url(#g)"/><rect x="28" y="6" width="10" height="28" rx="3" fill="#5EEAD4"/></svg>';
   var sizes=[16,32,48,64,128,256];
+  var results=new Array(sizes.length+1);
+  results[sizes.length]={sz:'svg',dataUrl:'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svgFavicon)};
   var pending=sizes.length;
-  var results=[];
   sizes.forEach(function(sz,idx){
     var svgStr='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 '+sz+' '+sz+'" width="'+sz+'" height="'+sz+'"><rect width="'+sz+'" height="'+sz+'" rx="'+(sz>32?Math.round(sz*.1):4)+'" fill="#0A1628"/><g transform="translate('+(sz*.15)+','+(sz*.05)+') scale('+(sz/52)+')"><rect x="2" y="36" width="10" height="10" rx="3" fill="#CBD5E1"/><rect x="15" y="22" width="10" height="18" rx="3" fill="#5EEAD4"/><rect x="28" y="6" width="10" height="28" rx="3" fill="#5EEAD4"/></g></svg>';
     var canvas=document.createElement('canvas');canvas.width=sz;canvas.height=sz;
@@ -668,17 +673,15 @@ function buildFaviconLinks(){
     };
     img.src='data:image/svg+xml;base64,'+btoa(unescape(encodeURIComponent(svgStr)));
   });
-  var svgFavicon='<?xml version="1.0" encoding="UTF-8"?><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 42 48" width="42" height="48"><defs><linearGradient id="g" x1="0" y1="1" x2="0" y2="0"><stop offset="0%" stop-color="#CBD5E1"/><stop offset="100%" stop-color="#5EEAD4"/></linearGradient></defs><rect x="2" y="36" width="10" height="10" rx="3" fill="#CBD5E1"/><rect x="15" y="22" width="10" height="18" rx="3" fill="url(#g)"/><rect x="28" y="6" width="10" height="28" rx="3" fill="#5EEAD4"/></svg>';
-  results.push({sz:'svg',dataUrl:'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svgFavicon)});
 }
 function renderFavLinks(results,container){
   var html='';
-  results.forEach(function(r){
-    if(!r)return;
+  for(var i=0;i<results.length;i++){
+    var r=results[i];
+    if(!r)continue;
     var label=r.sz==='svg'?'favicon.svg':'favicon-'+r.sz+'.png';
-    var ext=r.sz==='svg'?'.svg':'.png';
     html+='<a href="'+r.dataUrl+'" download="'+label+'" class="copy-btn" style="display:inline-block;text-decoration:none;padding:6px 14px;font-size:11px">'+label+'</a>';
-  });
+  }
   container.innerHTML=html;
 }
 function copyTokens(){
