@@ -194,10 +194,27 @@ h+='<div class="spec-card"><div class="spec-card-body" style="background:'+M+'">
 h+='<div class="spec-card"><div class="spec-card-body" style="background:'+W+'">'+lockupMono(48,22,'#9CA3AF')+'</div><div class="spec-card-label">Grayscale</div></div></div>';
 
 h+='<h3>Favicon &amp; Avatar Sizes</h3>';
+h+='<h4>Dark Background (Primary)</h4>';
 h+='<div style="display:flex;align-items:end;gap:12px;flex-wrap:wrap;margin:16px 0">';
 [256,128,64,48,32,16].forEach(function(sz){
   var isz=Math.max(8,Math.round(sz*.6));
   h+='<div style="text-align:center"><div style="width:'+sz+'px;height:'+sz+'px;border-radius:'+(sz>32?12:6)+'px;background:'+M+';display:flex;align-items:center;justify-content:center;border:1px solid '+S2+'">'+icon(isz,true)+'</div><div style="font-size:9px;color:'+S4+';margin-top:4px">'+sz+'px</div></div>';
+});
+h+='</div>';
+h+='<h4>White Background</h4>';
+h+='<p class="note" style="margin-bottom:8px">For platforms where a light avatar blends better with the feed (LinkedIn, Google Workspace, light-mode Slack).</p>';
+h+='<div style="display:flex;align-items:end;gap:12px;flex-wrap:wrap;margin:16px 0">';
+[256,128,64,48,32,16].forEach(function(sz){
+  var isz=Math.max(8,Math.round(sz*.6));
+  h+='<div style="text-align:center"><div style="width:'+sz+'px;height:'+sz+'px;border-radius:'+(sz>32?12:6)+'px;background:'+W+';display:flex;align-items:center;justify-content:center;border:1px solid '+S2+'">'+icon(isz,false)+'</div><div style="font-size:9px;color:'+S4+';margin-top:4px">'+sz+'px</div></div>';
+});
+h+='</div>';
+h+='<h4>Branded Tint (Teal-50)</h4>';
+h+='<p class="note" style="margin-bottom:8px">A softer branded alternative that stands out without the full dark treatment.</p>';
+h+='<div style="display:flex;align-items:end;gap:12px;flex-wrap:wrap;margin:16px 0">';
+[256,128,64,48,32,16].forEach(function(sz){
+  var isz=Math.max(8,Math.round(sz*.6));
+  h+='<div style="text-align:center"><div style="width:'+sz+'px;height:'+sz+'px;border-radius:'+(sz>32?12:6)+'px;background:'+T50+';display:flex;align-items:center;justify-content:center;border:1px solid '+MT+'">'+icon(isz,false)+'</div><div style="font-size:9px;color:'+S4+';margin-top:4px">'+sz+'px</div></div>';
 });
 h+='</div>';
 
@@ -337,6 +354,41 @@ h+='<div style="display:flex;gap:16px;margin:12px 0">';
 });
 h+='</div>';
 h+='<p class="note">Always use outline (not filled) icons to match the brand\'s clean, modern aesthetic.</p>';
+
+h+='<h3>Applied to LatAm Scalers</h3>';
+h+='<p class="note" style="margin-bottom:16px">Concrete icon usage across latamscalers.com — navigation, hero stats, process steps, and trust signals. Each icon shown in default (Midnight) and active (Aqua) states.</p>';
+var uiIcons=[
+  {p:'M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z',p2:'M9 22V12h6v10',n:'Home',ctx:'Main nav'},
+  {p:'M2 20h20M5 20V10l7-7 7 7v10M9 20v-4h6v4',n:'AEC / Building',ctx:'Category nav — AEC talent'},
+  {p:'M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5',n:'Layers / Design',ctx:'Category nav — Creative & Design'},
+  {p:'M18 20V10M12 20V4M6 20v-6',n:'Bar Chart / Marketing',ctx:'Category nav — Marketing talent'},
+  {p:'M13 2L3 14h9l-1 8 10-12h-9l1-8',n:'Zap / Speed',ctx:'Hero stat — 48h shortlist'},
+  {p:'M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3zM19 10v2a7 7 0 0 1-14 0v-2',n:'Dollar / Savings',ctx:'Hero stat — 50-70% cost savings'},
+  {p:'M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10zM2 12h20',n:'Globe / Timezone',ctx:'Hero stat — 0-3h overlap'},
+  {p:'M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z',n:'Shield / Guarantee',ctx:'Hero stat — Free replacement'},
+  {p:'M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zM14 2v6h6M16 13H8M16 17H8M10 9H8',n:'FileText / Brief',ctx:'Process step 1 — Tell us your needs'},
+  {p:'M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75',n:'Users / Candidates',ctx:'Process step 2 — Get vetted candidates'},
+  {p:'M22 11.08V12a10 10 0 1 1-5.93-9.14M22 4L12 14.01l-3-3',n:'CheckCircle / Vetted',ctx:'Trust signal — 5-stage vetting'},
+  {p:'M23 6l-9.5 9.5-5-5L1 18',n:'TrendingUp / Scale',ctx:'Process step 5 — Scale + replace'}
+];
+h+='<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px;margin:12px 0">';
+uiIcons.forEach(function(ic){
+  var paths=ic.p2?'<path d="'+ic.p+'"/><path d="'+ic.p2+'"/>':'<path d="'+ic.p+'"/>';
+  h+='<div style="background:'+W+';border:1px solid '+S2+';border-radius:10px;padding:12px;display:flex;align-items:center;gap:10px">';
+  h+='<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="'+M+'" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">'+paths+'</svg>';
+  h+='<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="'+A+'" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">'+paths+'</svg>';
+  h+='<div><div style="font-size:11px;font-weight:600;color:'+M+'">'+ic.n+'</div><div style="font-size:9px;color:'+S4+'">'+ic.ctx+'</div></div></div>';
+});
+h+='</div>';
+
+h+='<h4>Icon Usage in Context</h4>';
+h+='<p class="note" style="margin-bottom:12px">How icons appear inside a feature stats row, similar to the latamscalers.com hero.</p>';
+h+='<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:12px 0">';
+[{ic:'M13 2L3 14h9l-1 8 10-12h-9l1-8',v:'48h',l:'Shortlist delivered'},{ic:'M18 20V10M12 20V4M6 20v-6',v:'50–70%',l:'Cost savings vs US'},{ic:'M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10zM2 12h20',v:'0–3h',l:'Timezone overlap'},{ic:'M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z',v:'Free',l:'Replacement guarantee'}].forEach(function(s){
+  h+='<div style="text-align:center;background:'+T50+';border-radius:10px;padding:14px 8px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="'+T6+'" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="'+s.ic+'"/></svg><div style="font-size:20px;font-weight:700;color:'+M+';margin-top:4px">'+s.v+'</div><div style="font-size:9px;color:'+S4+'">'+s.l+'</div></div>';
+});
+h+='</div>';
+
 h+='<hr class="chapter-divider"></section>';
 
 // ── 7. PHOTOGRAPHY & PROFILE CARDS ──
@@ -367,8 +419,44 @@ h+='<section class="chapter" id="digital">';
 h+='<div class="chapter-num">Chapter 7</div><h2>Digital Applications</h2>';
 h+='<p class="chapter-intro">How the brand appears across web, email, and social media.</p>';
 
-h+='<h3>Website Header</h3>';
+h+='<h3>Website Hero / Header</h3>';
+h+='<h4>Option A — Minimal White (Original)</h4>';
 h+='<div class="mockup"><div class="mockup-bar"><div class="mockup-dots"><span></span><span></span><span></span></div><span style="font-size:10px;color:'+S4+'">latamscalers.com</span></div><div class="mockup-body"><div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid '+S2+';margin-bottom:16px"><div>'+wm(14,false)+'</div><div style="display:flex;align-items:center;gap:16px"><span style="font-size:11px;color:'+S6+'">Solutions</span><span style="font-size:11px;color:'+S6+'">Talent</span><span style="font-size:11px;color:'+S6+'">Pricing</span><span class="btn" style="background:'+A+';color:'+M+';padding:6px 14px;font-size:10px">Book a Call</span></div></div><div style="text-align:center;padding:32px 0"><div style="font-size:28px;font-weight:700;color:'+M+';letter-spacing:-0.8px;margin-bottom:8px">Scale Fast with Elite LATAM Talent</div><div style="font-size:13px;color:'+S4+';margin-bottom:16px">From one expert to full teams — matched in less than a week</div><span class="btn" style="background:'+A+';color:'+M+';font-size:12px">Book a Call &rarr;</span></div></div></div>';
+
+h+='<h4 style="margin-top:24px">Option B — White, Full Hero (latamscalers.com Layout)</h4>';
+h+='<p class="note" style="margin-bottom:8px">Mirrors the actual latamscalers.com hero structure: H1 + subtitle, dual CTAs, 4-stat row, and trust badges.</p>';
+h+='<div class="mockup"><div class="mockup-bar"><div class="mockup-dots"><span></span><span></span><span></span></div><span style="font-size:10px;color:'+S4+'">latamscalers.com</span></div><div class="mockup-body" style="padding:0">';
+h+='<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 20px;border-bottom:1px solid '+S2+'"><div style="display:flex;align-items:center;gap:6px">'+icon(18,false)+wm(11,false)+'</div><div style="display:flex;align-items:center;gap:14px"><span style="font-size:10px;font-weight:500;color:'+S6+'">AEC</span><span style="font-size:10px;font-weight:500;color:'+S6+'">Design</span><span style="font-size:10px;font-weight:500;color:'+S6+'">Marketing</span><span class="btn" style="background:'+A+';color:'+M+';padding:5px 12px;font-size:9px">Get Started</span></div></div>';
+h+='<div style="padding:28px 20px 20px;text-align:center"><div style="font-size:22px;font-weight:700;color:'+M+';letter-spacing:-.6px;line-height:1.2;margin-bottom:6px">Scale Your US Team with Dedicated<br>LATAM Specialists</div><div style="font-size:11px;color:'+S4+';margin-bottom:14px;max-width:420px;margin-left:auto;margin-right:auto">Pre-vetted AEC, Design, and Marketing professionals. 50&ndash;70% cost savings. Month-to-month flexibility. Free replacement guarantee.</div>';
+h+='<div style="display:flex;justify-content:center;gap:8px;margin-bottom:20px"><span class="btn" style="background:'+A+';color:'+M+';padding:8px 16px;font-size:10px">Book a 30-Minute Scoping Call</span><span class="btn" style="background:transparent;color:'+M+';border:1.5px solid '+A+';padding:8px 16px;font-size:10px">Tell Us What You Need</span></div>';
+h+='<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;max-width:480px;margin:0 auto">';
+[{v:'48h',l:'Shortlist delivered',ic:'M13 2L3 14h9l-1 8 10-12h-9l1-8'},{v:'50–70%',l:'vs. US-based hires',ic:'M18 20V10M12 20V4M6 20v-6'},{v:'0–3h',l:'Timezone overlap',ic:'M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10zM2 12h20'},{v:'Free',l:'Replacement',ic:'M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z'}].forEach(function(s){
+  h+='<div style="text-align:center;background:'+T50+';border-radius:8px;padding:10px 4px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="'+T6+'" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="'+s.ic+'"/></svg><div style="font-size:14px;font-weight:700;color:'+M+';margin-top:2px">'+s.v+'</div><div style="font-size:8px;color:'+S4+'">'+s.l+'</div></div>';
+});
+h+='</div>';
+h+='<div style="display:flex;justify-content:center;gap:12px;margin-top:14px;font-size:8px;color:'+S4+'">';
+['Matched in &lt; 1 Week','5-Stage Vetted','50–70% Cost Savings','Free Replacement'].forEach(function(b){
+  h+='<span style="display:flex;align-items:center;gap:3px"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="'+T6+'" stroke-width="2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>'+b+'</span>';
+});
+h+='</div></div></div></div>';
+
+h+='<h4 style="margin-top:24px">Option C — Dark Hero (Midnight Background)</h4>';
+h+='<p class="note" style="margin-bottom:8px">A premium dark variant similar to the current latamscalers.com dark theme. High contrast, Aqua accents, gradient top stripe.</p>';
+h+='<div class="mockup"><div class="mockup-bar" style="background:'+M+';border-color:rgba(255,255,255,.06)"><div class="mockup-dots"><span style="background:rgba(255,255,255,.15)"></span><span style="background:rgba(255,255,255,.15)"></span><span style="background:rgba(255,255,255,.15)"></span></div><span style="font-size:10px;color:'+S4+'">latamscalers.com</span></div><div class="mockup-body" style="padding:0;background:'+M+'">';
+h+='<div style="height:3px;background:linear-gradient(90deg,'+M+','+A+','+MT+')"></div>';
+h+='<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 20px;border-bottom:1px solid rgba(255,255,255,.06)"><div style="display:flex;align-items:center;gap:6px">'+icon(18,true)+wm(11,true)+'</div><div style="display:flex;align-items:center;gap:14px"><span style="font-size:10px;font-weight:500;color:'+S4+'">AEC</span><span style="font-size:10px;font-weight:500;color:'+S4+'">Design</span><span style="font-size:10px;font-weight:500;color:'+S4+'">Marketing</span><span class="btn" style="background:'+A+';color:'+M+';padding:5px 12px;font-size:9px">Get Started</span></div></div>';
+h+='<div style="padding:28px 20px 20px;text-align:center"><div style="font-size:22px;font-weight:700;color:'+W+';letter-spacing:-.6px;line-height:1.2;margin-bottom:6px">Scale Your US Team with Dedicated<br>LATAM Specialists</div><div style="font-size:11px;color:'+S4+';margin-bottom:14px;max-width:420px;margin-left:auto;margin-right:auto">Pre-vetted AEC, Design, and Marketing professionals. 50&ndash;70% cost savings. Month-to-month flexibility. Free replacement guarantee.</div>';
+h+='<div style="display:flex;justify-content:center;gap:8px;margin-bottom:20px"><span class="btn" style="background:'+A+';color:'+M+';padding:8px 16px;font-size:10px">Book a 30-Minute Scoping Call</span><span class="btn" style="background:transparent;color:'+MT+';border:1.5px solid rgba(94,234,212,.3);padding:8px 16px;font-size:10px">Tell Us What You Need</span></div>';
+h+='<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;max-width:480px;margin:0 auto">';
+[{v:'48h',l:'Shortlist delivered'},{v:'50–70%',l:'vs. US-based hires'},{v:'0–3h',l:'Timezone overlap'},{v:'Free',l:'Replacement'}].forEach(function(s){
+  h+='<div style="text-align:center;background:rgba(94,234,212,.06);border:1px solid rgba(94,234,212,.1);border-radius:8px;padding:10px 4px"><div style="font-size:14px;font-weight:700;color:'+A+'">'+s.v+'</div><div style="font-size:8px;color:'+S4+'">'+s.l+'</div></div>';
+});
+h+='</div>';
+h+='<div style="display:flex;justify-content:center;gap:12px;margin-top:14px;font-size:8px;color:'+S4+'">';
+['Matched in &lt; 1 Week','5-Stage Vetted','50–70% Cost Savings','Free Replacement'].forEach(function(b){
+  h+='<span style="display:flex;align-items:center;gap:3px"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="'+A+'" stroke-width="2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>'+b+'</span>';
+});
+h+='</div></div></div></div>';
 
 h+='<h3>Email Signatures (GSuite)</h3>';
 h+='<p class="note" style="margin-bottom:16px">Four signature options — all GSuite-compatible, all using inline styles and table layout. Pick the one that fits your context.</p>';
@@ -397,6 +485,15 @@ h+='<div class="spec-card"><div class="spec-card-body" style="background:'+M+'">
 h+='<div class="spec-card"><div class="spec-card-body" style="background:'+M+';min-height:60px"><div style="display:flex;align-items:center;justify-content:center;gap:8px">'+icon(28,true)+wm(16,true)+'</div></div><div class="spec-card-label">LinkedIn Banner (1128×191)</div></div>';
 h+='<div class="spec-card"><div class="spec-card-body" style="background:'+M+'">'+icon(36,true)+'</div><div class="spec-card-label">Slack / Notion Avatar (128×128)</div></div>';
 h+='</div>';
+
+h+='<h4 style="margin-top:24px">Light Background Alternatives</h4>';
+h+='<p class="note" style="margin-bottom:12px">For platforms where your ICPs browse in light mode. LinkedIn\'s feed and Google Workspace are predominantly white — a light avatar can feel more native and approachable.</p>';
+h+='<div class="spec-grid">';
+h+='<div class="spec-card"><div class="spec-card-body" style="background:'+W+'"><div style="width:80px;height:80px;border-radius:50%;background:'+W+';border:2.5px solid '+A+';display:flex;align-items:center;justify-content:center">'+icon(44,false)+'</div></div><div class="spec-card-label">LinkedIn / Twitter Avatar — White + Aqua Ring</div></div>';
+h+='<div class="spec-card"><div class="spec-card-body" style="background:'+W+';min-height:60px;position:relative"><div style="display:flex;align-items:center;justify-content:center;gap:8px">'+icon(28,false)+wm(16,false)+'</div><div style="position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,'+M+','+A+')"></div></div><div class="spec-card-label">LinkedIn Banner — White + Gradient Accent</div></div>';
+h+='<div class="spec-card"><div class="spec-card-body" style="background:'+T50+'">'+icon(36,false)+'</div><div class="spec-card-label">Slack / Notion Avatar — Teal-50 Tint</div></div>';
+h+='</div>';
+h+='<p class="note"><strong>Recommendation:</strong> Use dark avatars (primary) for brand authority and consistency. Use light variants when testing engagement with B2B decision-makers on LinkedIn\'s white feed, or for Google Workspace integrations where dark icons can feel heavy.</p>';
 
 h+='<h3>Favicon in Browser</h3>';
 h+='<div class="mockup"><div class="mockup-bar"><div style="display:flex;align-items:center;gap:6px"><div style="background:'+W+';border-radius:4px;padding:3px 6px;display:flex;align-items:center;gap:4px;border:1px solid '+S2+'"><div style="width:12px;height:12px;background:'+M+';border-radius:2px;display:flex;align-items:center;justify-content:center">'+icon(8,true)+'</div><span style="font-size:10px;color:'+S6+'">LatAm Scalers</span></div></div></div><div class="mockup-body" style="min-height:48px;display:flex;align-items:center;justify-content:center"><span style="font-size:11px;color:'+S4+'">← Favicon visible in browser tab</span></div></div>';
