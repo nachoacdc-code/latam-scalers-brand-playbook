@@ -1,4 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 18" width="120" height="18">
-  <text x="0" y="14" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="400" fill="#0A1628">latam</text>
-  <text x="48" y="14" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="700" fill="#0A1628">scalers</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 135 22" width="135" height="22">
+  <defs>
+    <linearGradient id="gradL" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="#0A1628"/>
+      <stop offset="100%" stop-color="#5EEAD4"/>
+    </linearGradient>
+  </defs>
+  <text x="0" y="16" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="400" fill="#0A1628">latam </text>
+  <text x="48" y="16" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="700" fill="#0A1628">sca</text>
+  <text x="74" y="16" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="700" fill="url(#gradL)">l</text>
+  <text x="88" y="16" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="700" fill="#0A1628">ers</text>
 </svg>
