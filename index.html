@@ -610,37 +610,68 @@ document.querySelectorAll('.chapter').forEach(function(s){observer.observe(s)});
 // Close sidebar on mobile after click
 links.forEach(function(l){l.addEventListener('click',function(){document.querySelector('.sidebar').classList.remove('open')})});
 
-// Download helpers
+// Download helpers — generate valid SVG strings (no DOM cloning)
+function getLogoSVGString(i){
+  var vbIcon='0 0 42 48', vb='0 0 220 48';
+  var iconG='<g transform="scale(0.952)"><rect x="2" y="36" width="10" height="10" rx="3" fill="FILL1"/><rect x="15" y="22" width="10" height="18" rx="3" fill="FILL2"/><rect x="28" y="6" width="10" height="28" rx="3" fill="FILL3"/></g>';
+  if(i===2){
+    return '<?xml version="1.0" encoding="UTF-8"?><svg xmlns="http://www.w3.org/2000/svg" viewBox="'+vbIcon+'" width="42" height="48"><defs><linearGradient id="g" x1="0" y1="1" x2="0" y2="0"><stop offset="0%" stop-color="#0A1628"/><stop offset="100%" stop-color="#5EEAD4"/></linearGradient></defs><rect x="2" y="36" width="10" height="10" rx="3" fill="#0A1628"/><rect x="15" y="22" width="10" height="18" rx="3" fill="url(#g)"/><rect x="28" y="6" width="10" height="28" rx="3" fill="#5EEAD4"/></svg>';
+  }
+  if(i===3){
+    return '<?xml version="1.0" encoding="UTF-8"?><svg xmlns="http://www.w3.org/2000/svg" viewBox="'+vbIcon+'" width="42" height="48"><defs><linearGradient id="g" x1="0" y1="1" x2="0" y2="0"><stop offset="0%" stop-color="#CBD5E1"/><stop offset="100%" stop-color="#5EEAD4"/></linearGradient></defs><rect x="2" y="36" width="10" height="10" rx="3" fill="#CBD5E1"/><rect x="15" y="22" width="10" height="18" rx="3" fill="url(#g)"/><rect x="28" y="6" width="10" height="28" rx="3" fill="#5EEAD4"/></svg>';
+  }
+  var defsLight='<defs><linearGradient id="gradL" x1="0" y1="1" x2="0" y2="0"><stop offset="0%" stop-color="#0A1628"/><stop offset="100%" stop-color="#5EEAD4"/></linearGradient><linearGradient id="gradIcon" x1="0" y1="1" x2="0" y2="0"><stop offset="0%" stop-color="#0A1628"/><stop offset="100%" stop-color="#5EEAD4"/></linearGradient></defs>';
+  var defsDark='<defs><linearGradient id="gradL" x1="0" y1="1" x2="0" y2="0"><stop offset="0%" stop-color="#FFFFFF"/><stop offset="100%" stop-color="#5EEAD4"/></linearGradient><linearGradient id="gradIcon" x1="0" y1="1" x2="0" y2="0"><stop offset="0%" stop-color="#CBD5E1"/><stop offset="100%" stop-color="#5EEAD4"/></linearGradient></defs>';
+  var textLight='<text x="46" y="32" font-family="Inter,sans-serif" font-size="20" font-weight="400" fill="#0A1628">latam </text><text x="92" y="32" font-family="Inter,sans-serif" font-size="20" font-weight="700" fill="#0A1628">sca</text><text x="118" y="32" font-family="Inter,sans-serif" font-size="29" font-weight="700" fill="url(#gradL)">l</text><text x="138" y="32" font-family="Inter,sans-serif" font-size="20" font-weight="700" fill="#0A1628">ers</text>';
+  var textDark='<text x="46" y="32" font-family="Inter,sans-serif" font-size="20" font-weight="400" fill="#FFFFFF">latam </text><text x="92" y="32" font-family="Inter,sans-serif" font-size="20" font-weight="700" fill="#FFFFFF">sca</text><text x="118" y="32" font-family="Inter,sans-serif" font-size="29" font-weight="700" fill="url(#gradL)">l</text><text x="138" y="32" font-family="Inter,sans-serif" font-size="20" font-weight="700" fill="#FFFFFF">ers</text>';
+  if(i===0)return '<?xml version="1.0" encoding="UTF-8"?><svg xmlns="http://www.w3.org/2000/svg" viewBox="'+vb+'" width="220" height="48">'+defsLight+iconG.replace('FILL1','#0A1628').replace('FILL2','url(#gradIcon)').replace('FILL3','#5EEAD4')+textLight+'</svg>';
+  if(i===1)return '<?xml version="1.0" encoding="UTF-8"?><svg xmlns="http://www.w3.org/2000/svg" viewBox="'+vb+'" width="220" height="48">'+defsDark+iconG.replace('FILL1','#CBD5E1').replace('FILL2','url(#gradIcon)').replace('FILL3','#5EEAD4')+textDark+'</svg>';
+  if(i===4)return '<?xml version="1.0" encoding="UTF-8"?><svg xmlns="http://www.w3.org/2000/svg" viewBox="'+vb+'" width="220" height="48">'+iconG.replace('FILL1','#0A1628').replace('FILL2','#0A1628').replace('FILL3','#0A1628')+'<text x="46" y="32" font-family="Inter,sans-serif" font-size="20" font-weight="400" fill="#0A1628">latam </text><text x="92" y="32" font-family="Inter,sans-serif" font-size="20" font-weight="700" fill="#0A1628">sca</text><text x="118" y="32" font-family="Inter,sans-serif" font-size="29" font-weight="700" fill="#0A1628">l</text><text x="138" y="32" font-family="Inter,sans-serif" font-size="20" font-weight="700" fill="#0A1628">ers</text></svg>';
+  if(i===5)return '<?xml version="1.0" encoding="UTF-8"?><svg xmlns="http://www.w3.org/2000/svg" viewBox="'+vb+'" width="220" height="48">'+iconG.replace('FILL1','#FFFFFF').replace('FILL2','#FFFFFF').replace('FILL3','#FFFFFF')+'<text x="46" y="32" font-family="Inter,sans-serif" font-size="20" font-weight="400" fill="#FFFFFF">latam </text><text x="92" y="32" font-family="Inter,sans-serif" font-size="20" font-weight="700" fill="#FFFFFF">sca</text><text x="118" y="32" font-family="Inter,sans-serif" font-size="29" font-weight="700" fill="#FFFFFF">l</text><text x="138" y="32" font-family="Inter,sans-serif" font-size="20" font-weight="700" fill="#FFFFFF">ers</text></svg>';
+  return '';
+}
 function dlSVG(i){
-  var el=document.getElementById('dl-'+i);
-  var svg=el.querySelector('svg')||el.querySelector('div');
-  var svgs=el.querySelectorAll('svg');
-  var wrapper=document.createElementNS('http://www.w3.org/2000/svg','svg');
-  wrapper.setAttribute('xmlns','http://www.w3.org/2000/svg');
-  wrapper.setAttribute('viewBox','0 0 300 60');
-  wrapper.setAttribute('width','300');
-  wrapper.setAttribute('height','60');
-  wrapper.innerHTML=el.innerHTML;
-  var data=new XMLSerializer().serializeToString(wrapper);
-  var blob=new Blob([data],{type:'image/svg+xml'});
+  var data=getLogoSVGString(i);
+  if(!data){alert('Download not available for this variant.');return;}
+  var names=['lockup-light','lockup-dark','icon-only-light','icon-only-dark','lockup-mono-black','lockup-mono-white'];
+  var blob=new Blob([data],{type:'image/svg+xml;charset=utf-8'});
   var a=document.createElement('a');
-  a.download='latamscalers-logo-'+i+'.svg';
+  a.download='latamscalers-'+names[i]+'.svg';
   a.href=URL.createObjectURL(blob);
   a.click();
+  setTimeout(function(){URL.revokeObjectURL(a.href);},200);
 }
 function dlFavicons(){
-  [16,32,48,64,128,256].forEach(function(sz){
-    var isz=Math.max(8,Math.round(sz*.6));
+  var sizes=[16,32,48,64,128,256];
+  function doOne(idx){
+    if(idx>=sizes.length)return;
+    var sz=sizes[idx];
     var svgStr='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 '+sz+' '+sz+'" width="'+sz+'" height="'+sz+'"><rect width="'+sz+'" height="'+sz+'" rx="'+(sz>32?Math.round(sz*.1):4)+'" fill="#0A1628"/><g transform="translate('+(sz*.15)+','+(sz*.05)+') scale('+(sz/52)+')"><rect x="2" y="36" width="10" height="10" rx="3" fill="#CBD5E1"/><rect x="15" y="22" width="10" height="18" rx="3" fill="#5EEAD4"/><rect x="28" y="6" width="10" height="28" rx="3" fill="#5EEAD4"/></g></svg>';
     var canvas=document.createElement('canvas');canvas.width=sz;canvas.height=sz;
-    var ctx=canvas.getContext('2d');var img=new Image();
-    img.onload=function(){ctx.drawImage(img,0,0);var a=document.createElement('a');a.download='favicon-'+sz+'.png';a.href=canvas.toDataURL('image/png');a.click()};
-    img.src='data:image/svg+xml;base64,'+btoa(unescape(encodeURIComponent(svgStr)));
-  });
+    var ctx=canvas.getContext('2d');
+    var img=new Image();
+    img.onload=function(){
+      try{ctx.drawImage(img,0,0);}catch(e){}
+      var a=document.createElement('a');a.download='favicon-'+sz+'.png';a.href=canvas.toDataURL('image/png');a.click();
+      setTimeout(function(){doOne(idx+1);},350);
+    };
+    img.onerror=function(){setTimeout(function(){doOne(idx+1);},350);};
+    try{img.src='data:image/svg+xml;base64,'+btoa(unescape(encodeURIComponent(svgStr)));}catch(e){doOne(idx+1);}
+  }
+  doOne(0);
 }
 function copyTokens(){
   var txt=':root {\n  --midnight: #0A1628;\n  --aqua: #5EEAD4;\n  --teal-600: #14B8A6;\n  --mint-200: #A7F3D0;\n  --teal-50: #F0FDFA;\n  --slate-800: #1E293B;\n  --slate-600: #475569;\n  --slate-400: #94A3B8;\n  --slate-200: #E2E8F0;\n  --slate-100: #F1F5F9;\n  --white: #FFFFFF;\n  --success: #10B981;\n  --warning: #F59E0B;\n  --error: #EF4444;\n  --info: #3B82F6;\n}';
-  navigator.clipboard.writeText(txt).then(function(){alert('CSS variables copied to clipboard!')});
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(txt).then(function(){alert('CSS variables copied to clipboard!');}).catch(function(){
+      fallbackCopy(txt);
+    });
+  }else{fallbackCopy(txt);}
+}
+function fallbackCopy(txt){
+  var ta=document.createElement('textarea');ta.value=txt;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();
+  try{document.execCommand('copy');alert('CSS variables copied to clipboard!');}catch(e){alert('Copy failed. Here are the variables:\n\n'+txt);}
+  document.body.removeChild(ta);
 }
 </script>
 </body>
