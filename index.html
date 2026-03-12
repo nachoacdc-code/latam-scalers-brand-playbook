@@ -574,7 +574,9 @@ h+='<div class="spec-grid">';
 h+='</div>';
 
 h+='<h3>Favicon Package</h3>';
-h+='<div class="btn-row"><button class="copy-btn" onclick="dlFavicons()">Download All Favicon PNGs (16–256px)</button></div>';
+h+='<p class="note" style="margin-bottom:8px">Click each size to download. SVG favicons are resolution-independent; PNGs are provided for legacy compatibility.</p>';
+h+='<div id="fav-links" style="display:flex;flex-wrap:wrap;gap:8px;margin:8px 0"></div>';
+h+='<div class="btn-row" style="margin-top:8px"><button class="copy-btn" onclick="buildFaviconLinks()">Generate Favicon Download Links</button></div>';
 
 h+='<h3>Color Tokens</h3>';
 h+='<div class="btn-row"><button class="copy-btn" onclick="copyTokens()">Copy CSS Variables</button></div>';
@@ -634,31 +636,50 @@ function dlSVG(i){
   var data=getLogoSVGString(i);
   if(!data){alert('Download not available for this variant.');return;}
   var names=['lockup-light','lockup-dark','icon-only-light','icon-only-dark','lockup-mono-black','lockup-mono-white'];
-  var blob=new Blob([data],{type:'image/svg+xml;charset=utf-8'});
   var a=document.createElement('a');
   a.download='latamscalers-'+names[i]+'.svg';
-  a.href=URL.createObjectURL(blob);
+  a.href='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(data);
+  a.style.display='none';
+  document.body.appendChild(a);
   a.click();
-  setTimeout(function(){URL.revokeObjectURL(a.href);},200);
+  setTimeout(function(){document.body.removeChild(a);},300);
 }
-function dlFavicons(){
+function buildFaviconLinks(){
+  var container=document.getElementById('fav-links');
+  container.innerHTML='<span style="font-size:11px;color:#94A3B8">Generating...</span>';
   var sizes=[16,32,48,64,128,256];
-  function doOne(idx){
-    if(idx>=sizes.length)return;
-    var sz=sizes[idx];
+  var pending=sizes.length;
+  var results=[];
+  sizes.forEach(function(sz,idx){
     var svgStr='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 '+sz+' '+sz+'" width="'+sz+'" height="'+sz+'"><rect width="'+sz+'" height="'+sz+'" rx="'+(sz>32?Math.round(sz*.1):4)+'" fill="#0A1628"/><g transform="translate('+(sz*.15)+','+(sz*.05)+') scale('+(sz/52)+')"><rect x="2" y="36" width="10" height="10" rx="3" fill="#CBD5E1"/><rect x="15" y="22" width="10" height="18" rx="3" fill="#5EEAD4"/><rect x="28" y="6" width="10" height="28" rx="3" fill="#5EEAD4"/></g></svg>';
     var canvas=document.createElement('canvas');canvas.width=sz;canvas.height=sz;
     var ctx=canvas.getContext('2d');
     var img=new Image();
     img.onload=function(){
-      try{ctx.drawImage(img,0,0);}catch(e){}
-      var a=document.createElement('a');a.download='favicon-'+sz+'.png';a.href=canvas.toDataURL('image/png');a.click();
-      setTimeout(function(){doOne(idx+1);},350);
+      ctx.drawImage(img,0,0);
+      results[idx]={sz:sz,dataUrl:canvas.toDataURL('image/png')};
+      pending--;
+      if(pending===0)renderFavLinks(results,container);
     };
-    img.onerror=function(){setTimeout(function(){doOne(idx+1);},350);};
-    try{img.src='data:image/svg+xml;base64,'+btoa(unescape(encodeURIComponent(svgStr)));}catch(e){doOne(idx+1);}
-  }
-  doOne(0);
+    img.onerror=function(){
+      results[idx]={sz:sz,dataUrl:'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svgStr)};
+      pending--;
+      if(pending===0)renderFavLinks(results,container);
+    };
+    img.src='data:image/svg+xml;base64,'+btoa(unescape(encodeURIComponent(svgStr)));
+  });
+  var svgFavicon='<?xml version="1.0" encoding="UTF-8"?><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 42 48" width="42" height="48"><defs><linearGradient id="g" x1="0" y1="1" x2="0" y2="0"><stop offset="0%" stop-color="#CBD5E1"/><stop offset="100%" stop-color="#5EEAD4"/></linearGradient></defs><rect x="2" y="36" width="10" height="10" rx="3" fill="#CBD5E1"/><rect x="15" y="22" width="10" height="18" rx="3" fill="url(#g)"/><rect x="28" y="6" width="10" height="28" rx="3" fill="#5EEAD4"/></svg>';
+  results.push({sz:'svg',dataUrl:'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svgFavicon)});
+}
+function renderFavLinks(results,container){
+  var html='';
+  results.forEach(function(r){
+    if(!r)return;
+    var label=r.sz==='svg'?'favicon.svg':'favicon-'+r.sz+'.png';
+    var ext=r.sz==='svg'?'.svg':'.png';
+    html+='<a href="'+r.dataUrl+'" download="'+label+'" class="copy-btn" style="display:inline-block;text-decoration:none;padding:6px 14px;font-size:11px">'+label+'</a>';
+  });
+  container.innerHTML=html;
 }
 function copyTokens(){
   var txt=':root {\n  --midnight: #0A1628;\n  --aqua: #5EEAD4;\n  --teal-600: #14B8A6;\n  --mint-200: #A7F3D0;\n  --teal-50: #F0FDFA;\n  --slate-800: #1E293B;\n  --slate-600: #475569;\n  --slate-400: #94A3B8;\n  --slate-200: #E2E8F0;\n  --slate-100: #F1F5F9;\n  --white: #FFFFFF;\n  --success: #10B981;\n  --warning: #F59E0B;\n  --error: #EF4444;\n  --info: #3B82F6;\n}';
