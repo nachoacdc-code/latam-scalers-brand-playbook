@@ -1,0 +1,13 @@
+{
+  "name": "brand-playbook",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "test:png": "node test-png-transparency.js",
+    "build:png": "node scripts/build-pngs.js"
+  },
+  "devDependencies": {
+    "playwright": "^1.49.0",
+    "sharp": "^0.33.5"
+  }
+}
