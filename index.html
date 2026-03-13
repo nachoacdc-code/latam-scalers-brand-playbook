@@ -577,7 +577,7 @@ var svgNames=['lockup-light','lockup-dark','icon-only-light','icon-only-dark','l
   if(i===5)h+=lockupMono(40,20,W);
   var svgData=getLogoSVGString(i);
   var dataUri='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svgData);
-  h+='</div><div class="spec-card-label" style="display:flex;justify-content:space-between;align-items:center">'+name+'<a href="'+dataUri+'" download="latamscalers-'+svgNames[i]+'.svg" class="copy-btn" style="text-decoration:none;display:inline-block">Download SVG</a></div></div>';
+  h+='</div><div class="spec-card-label" style="display:flex;flex-wrap:wrap;gap:6px;align-items:center;justify-content:space-between">'+name+'<span style="display:flex;gap:6px"><a href="'+dataUri+'" download="latamscalers-'+svgNames[i]+'.svg" class="copy-btn" style="text-decoration:none;display:inline-block">SVG</a><button type="button" class="copy-btn" onclick="dlLogoPNG('+i+')" style="cursor:pointer">PNG</button></span></div></div>';
 });
 h+='</div>';
 
@@ -627,27 +627,28 @@ links.forEach(function(l){l.addEventListener('click',function(){document.querySe
 // Download helpers — generate valid SVG strings matching favicon.svg / design exactly
 function getLogoSVGString(i){
   var vbIcon='0 0 42 48';
-  var iconPaths='<rect x="2" y="36" width="10" height="10" rx="3"/><rect x="15" y="22" width="10" height="18" rx="3"/><rect x="28" y="6" width="10" height="28" rx="3"/>';
   var defsIconLight='<defs><linearGradient id="g" x1="0" y1="1" x2="0" y2="0"><stop offset="0%" stop-color="#0A1628"/><stop offset="100%" stop-color="#5EEAD4"/></linearGradient></defs>';
   var defsIconDark='<defs><linearGradient id="g" x1="0" y1="1" x2="0" y2="0"><stop offset="0%" stop-color="#CBD5E1"/><stop offset="100%" stop-color="#5EEAD4"/></linearGradient></defs>';
   if(i===2){
-    return '<?xml version="1.0" encoding="UTF-8"?><svg xmlns="http://www.w3.org/2000/svg" viewBox="'+vbIcon+'" width="42" height="48">'+defsIconLight+'<rect x="2" y="36" width="10" height="10" rx="3" fill="#0A1628"/><rect x="15" y="22" width="10" height="18" rx="3" fill="url(#g)"/><rect x="28" y="6" width="10" height="28" rx="3" fill="#5EEAD4"/></svg>';
+    return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="'+vbIcon+'" width="42" height="48"><rect width="42" height="48" fill="#FFFFFF"/>'+defsIconLight+'<rect x="2" y="36" width="10" height="10" rx="3" fill="#0A1628"/><rect x="15" y="22" width="10" height="18" rx="3" fill="url(#g)"/><rect x="28" y="6" width="10" height="28" rx="3" fill="#5EEAD4"/></svg>';
   }
   if(i===3){
-    return '<?xml version="1.0" encoding="UTF-8"?><svg xmlns="http://www.w3.org/2000/svg" viewBox="'+vbIcon+'" width="42" height="48">'+defsIconDark+'<rect x="2" y="36" width="10" height="10" rx="3" fill="#CBD5E1"/><rect x="15" y="22" width="10" height="18" rx="3" fill="url(#g)"/><rect x="28" y="6" width="10" height="28" rx="3" fill="#5EEAD4"/></svg>';
+    return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="'+vbIcon+'" width="42" height="48"><rect width="42" height="48" fill="#0A1628"/>'+defsIconDark+'<rect x="2" y="36" width="10" height="10" rx="3" fill="#CBD5E1"/><rect x="15" y="22" width="10" height="18" rx="3" fill="url(#g)"/><rect x="28" y="6" width="10" height="28" rx="3" fill="#5EEAD4"/></svg>';
   }
   var vb='0 0 220 48';
-  var iconG='<g transform="translate(0,0) scale(40/42)">';
-  var defsLight='<defs><linearGradient id="gradL" x1="0" y1="1" x2="0" y2="0"><stop offset="0%" stop-color="#0A1628"/><stop offset="100%" stop-color="#5EEAD4"/></linearGradient><linearGradient id="gradIcon" x1="0" y1="1" x2="0" y2="0"><stop offset="0%" stop-color="#0A1628"/><stop offset="100%" stop-color="#5EEAD4"/></linearGradient></defs>';
-  var defsDark='<defs><linearGradient id="gradL" x1="0" y1="1" x2="0" y2="0"><stop offset="0%" stop-color="#FFFFFF"/><stop offset="100%" stop-color="#5EEAD4"/></linearGradient><linearGradient id="gradIcon" x1="0" y1="1" x2="0" y2="0"><stop offset="0%" stop-color="#CBD5E1"/><stop offset="100%" stop-color="#5EEAD4"/></linearGradient></defs>';
+  var iconScale=0.952;
+  var iconG='<g transform="translate(0,0) scale('+iconScale+')">';
+  var fontFace='<style type="text/css">@font-face{font-family:Inter;font-style:normal;font-weight:400 700;font-display:swap;src:url(https://fonts.gstatic.com/s/inter/v18/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuLyfAZ9hjp-Ek-_EeA.woff2) format("woff2");}</style>';
+  var defsLight='<defs>'+fontFace+'<linearGradient id="gradL" x1="0" y1="1" x2="0" y2="0"><stop offset="0%" stop-color="#0A1628"/><stop offset="100%" stop-color="#5EEAD4"/></linearGradient><linearGradient id="gradIcon" x1="0" y1="1" x2="0" y2="0"><stop offset="0%" stop-color="#0A1628"/><stop offset="100%" stop-color="#5EEAD4"/></linearGradient></defs>';
+  var defsDark='<defs>'+fontFace+'<linearGradient id="gradL" x1="0" y1="1" x2="0" y2="0"><stop offset="0%" stop-color="#FFFFFF"/><stop offset="100%" stop-color="#5EEAD4"/></linearGradient><linearGradient id="gradIcon" x1="0" y1="1" x2="0" y2="0"><stop offset="0%" stop-color="#CBD5E1"/><stop offset="100%" stop-color="#5EEAD4"/></linearGradient></defs>';
   var iconPartLight=iconG+'<rect x="2" y="36" width="10" height="10" rx="3" fill="#0A1628"/><rect x="15" y="22" width="10" height="18" rx="3" fill="url(#gradIcon)"/><rect x="28" y="6" width="10" height="28" rx="3" fill="#5EEAD4"/></g>';
   var iconPartDark=iconG+'<rect x="2" y="36" width="10" height="10" rx="3" fill="#CBD5E1"/><rect x="15" y="22" width="10" height="18" rx="3" fill="url(#gradIcon)"/><rect x="28" y="6" width="10" height="28" rx="3" fill="#5EEAD4"/></g>';
-  var textLight='<text x="48" y="33" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="400" fill="#0A1628">latam </text><text x="102" y="33" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="700" fill="#0A1628">sca</text><text x="132" y="33" font-family="Inter, Arial, sans-serif" font-size="29" font-weight="700" fill="url(#gradL)">l</text><text x="150" y="33" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="700" fill="#0A1628">ers</text>';
-  var textDark='<text x="48" y="33" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="400" fill="#FFFFFF">latam </text><text x="102" y="33" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="700" fill="#FFFFFF">sca</text><text x="132" y="33" font-family="Inter, Arial, sans-serif" font-size="29" font-weight="700" fill="url(#gradL)">l</text><text x="150" y="33" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="700" fill="#FFFFFF">ers</text>';
-  if(i===0)return '<?xml version="1.0" encoding="UTF-8"?><svg xmlns="http://www.w3.org/2000/svg" viewBox="'+vb+'" width="220" height="48">'+defsLight+iconPartLight+textLight+'</svg>';
-  if(i===1)return '<?xml version="1.0" encoding="UTF-8"?><svg xmlns="http://www.w3.org/2000/svg" viewBox="'+vb+'" width="220" height="48">'+defsDark+'<g transform="translate(0,0) scale(40/42)"><rect x="2" y="36" width="10" height="10" rx="3" fill="#CBD5E1"/><rect x="15" y="22" width="10" height="18" rx="3" fill="url(#gradIcon)"/><rect x="28" y="6" width="10" height="28" rx="3" fill="#5EEAD4"/></g>'+textDark+'</svg>';
-  if(i===4)return '<?xml version="1.0" encoding="UTF-8"?><svg xmlns="http://www.w3.org/2000/svg" viewBox="'+vb+'" width="220" height="48"><g transform="translate(0,0) scale(40/42)"><rect x="2" y="36" width="10" height="10" rx="3" fill="#0A1628"/><rect x="15" y="22" width="10" height="18" rx="3" fill="#0A1628"/><rect x="28" y="6" width="10" height="28" rx="3" fill="#0A1628"/></g>'+textLight.replace('url(#gradL)','#0A1628')+'</svg>';
-  if(i===5)return '<?xml version="1.0" encoding="UTF-8"?><svg xmlns="http://www.w3.org/2000/svg" viewBox="'+vb+'" width="220" height="48"><g transform="translate(0,0) scale(40/42)"><rect x="2" y="36" width="10" height="10" rx="3" fill="#FFFFFF"/><rect x="15" y="22" width="10" height="18" rx="3" fill="#FFFFFF"/><rect x="28" y="6" width="10" height="28" rx="3" fill="#FFFFFF"/></g>'+textDark.replace('url(#gradL)','#FFFFFF')+'</svg>';
+  var textLight='<text x="48" y="33" font-family="Inter,Arial,sans-serif" font-size="20" font-weight="400" fill="#0A1628">latam </text><text x="100" y="33" font-family="Inter,Arial,sans-serif" font-size="20" font-weight="700" fill="#0A1628">sca</text><text x="130" y="33" font-family="Inter,Arial,sans-serif" font-size="29" font-weight="700" fill="url(#gradL)">l</text><text x="148" y="33" font-family="Inter,Arial,sans-serif" font-size="20" font-weight="700" fill="#0A1628">ers</text>';
+  var textDark='<text x="48" y="33" font-family="Inter,Arial,sans-serif" font-size="20" font-weight="400" fill="#FFFFFF">latam </text><text x="100" y="33" font-family="Inter,Arial,sans-serif" font-size="20" font-weight="700" fill="#FFFFFF">sca</text><text x="130" y="33" font-family="Inter,Arial,sans-serif" font-size="29" font-weight="700" fill="url(#gradL)">l</text><text x="148" y="33" font-family="Inter,Arial,sans-serif" font-size="20" font-weight="700" fill="#FFFFFF">ers</text>';
+  if(i===0)return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="'+vb+'" width="220" height="48"><rect width="220" height="48" fill="#FFFFFF"/>'+defsLight+iconPartLight+textLight+'</svg>';
+  if(i===1)return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="'+vb+'" width="220" height="48"><rect width="220" height="48" fill="#0A1628"/>'+defsDark+iconPartDark+textDark+'</svg>';
+  if(i===4)return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="'+vb+'" width="220" height="48"><rect width="220" height="48" fill="#FFFFFF"/>'+iconG+'<rect x="2" y="36" width="10" height="10" rx="3" fill="#0A1628"/><rect x="15" y="22" width="10" height="18" rx="3" fill="#0A1628"/><rect x="28" y="6" width="10" height="28" rx="3" fill="#0A1628"/></g>'+textLight.replace('url(#gradL)','#0A1628')+'</svg>';
+  if(i===5)return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="'+vb+'" width="220" height="48"><rect width="220" height="48" fill="#0A1628"/>'+iconG+'<rect x="2" y="36" width="10" height="10" rx="3" fill="#FFFFFF"/><rect x="15" y="22" width="10" height="18" rx="3" fill="#FFFFFF"/><rect x="28" y="6" width="10" height="28" rx="3" fill="#FFFFFF"/></g>'+textDark.replace('url(#gradL)','#FFFFFF')+'</svg>';
   return '';
 }
 function dlSVG(i){
@@ -661,6 +662,31 @@ function dlSVG(i){
   document.body.appendChild(a);
   a.click();
   setTimeout(function(){document.body.removeChild(a);},300);
+}
+function dlLogoPNG(i){
+  var data=getLogoSVGString(i);
+  if(!data){alert('Download not available for this variant.');return;}
+  var names=['lockup-light','lockup-dark','icon-only-light','icon-only-dark','lockup-mono-black','lockup-mono-white'];
+  var isLockup=i===0||i===1||i===4||i===5;
+  var scale=4;
+  var w=isLockup?220*scale:42*scale,h=isLockup?48*scale:48*scale;
+  var img=new Image();
+  img.onload=function(){
+    var canvas=document.createElement('canvas');
+    canvas.width=w;
+    canvas.height=h;
+    var ctx=canvas.getContext('2d');
+    ctx.drawImage(img,0,0,w,h);
+    var a=document.createElement('a');
+    a.download='latamscalers-'+names[i]+'.png';
+    a.href=canvas.toDataURL('image/png');
+    a.style.display='none';
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(function(){document.body.removeChild(a);},300);
+  };
+  img.onerror=function(){alert('PNG generation failed. Try downloading the SVG instead.');};
+  img.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(data);
 }
 function buildFaviconLinks(){
   var container=document.getElementById('fav-links');
