@@ -625,15 +625,24 @@ document.querySelectorAll('.chapter').forEach(function(s){observer.observe(s)});
 links.forEach(function(l){l.addEventListener('click',function(){document.querySelector('.sidebar').classList.remove('open')})});
 
 // Download helpers — generate valid SVG strings matching favicon.svg / design exactly
-function getLogoSVGString(i){
+// transparent=true omits background rect so PNG exports have alpha for placement anywhere
+function getLogoSVGString(i,transparent){
   var vbIcon='0 0 42 48';
   var defsIconLight='<defs><linearGradient id="g" x1="0" y1="1" x2="0" y2="0"><stop offset="0%" stop-color="#0A1628"/><stop offset="100%" stop-color="#5EEAD4"/></linearGradient></defs>';
   var defsIconDark='<defs><linearGradient id="g" x1="0" y1="1" x2="0" y2="0"><stop offset="0%" stop-color="#CBD5E1"/><stop offset="100%" stop-color="#5EEAD4"/></linearGradient></defs>';
+  var bg='';
+  var lockupBg='';
+  if(!transparent){
+    if(i===2)bg='<rect width="42" height="48" fill="#FFFFFF"/>';
+    else if(i===3)bg='<rect width="42" height="48" fill="#0A1628"/>';
+    else if(i===0||i===4)lockupBg='<rect width="220" height="48" fill="#FFFFFF"/>';
+    else if(i===1||i===5)lockupBg='<rect width="220" height="48" fill="#0A1628"/>';
+  }
   if(i===2){
-    return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="'+vbIcon+'" width="42" height="48"><rect width="42" height="48" fill="#FFFFFF"/>'+defsIconLight+'<rect x="2" y="36" width="10" height="10" rx="3" fill="#0A1628"/><rect x="15" y="22" width="10" height="18" rx="3" fill="url(#g)"/><rect x="28" y="6" width="10" height="28" rx="3" fill="#5EEAD4"/></svg>';
+    return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="'+vbIcon+'" width="42" height="48">'+bg+defsIconLight+'<rect x="2" y="36" width="10" height="10" rx="3" fill="#0A1628"/><rect x="15" y="22" width="10" height="18" rx="3" fill="url(#g)"/><rect x="28" y="6" width="10" height="28" rx="3" fill="#5EEAD4"/></svg>';
   }
   if(i===3){
-    return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="'+vbIcon+'" width="42" height="48"><rect width="42" height="48" fill="#0A1628"/>'+defsIconDark+'<rect x="2" y="36" width="10" height="10" rx="3" fill="#CBD5E1"/><rect x="15" y="22" width="10" height="18" rx="3" fill="url(#g)"/><rect x="28" y="6" width="10" height="28" rx="3" fill="#5EEAD4"/></svg>';
+    return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="'+vbIcon+'" width="42" height="48">'+bg+defsIconDark+'<rect x="2" y="36" width="10" height="10" rx="3" fill="#CBD5E1"/><rect x="15" y="22" width="10" height="18" rx="3" fill="url(#g)"/><rect x="28" y="6" width="10" height="28" rx="3" fill="#5EEAD4"/></svg>';
   }
   var vb='0 0 220 48';
   var iconScale=0.952;
@@ -645,10 +654,10 @@ function getLogoSVGString(i){
   var iconPartDark=iconG+'<rect x="2" y="36" width="10" height="10" rx="3" fill="#CBD5E1"/><rect x="15" y="22" width="10" height="18" rx="3" fill="url(#gradIcon)"/><rect x="28" y="6" width="10" height="28" rx="3" fill="#5EEAD4"/></g>';
   var textLight='<text x="48" y="33" font-family="Inter,Arial,sans-serif" font-size="20" font-weight="400" fill="#0A1628">latam </text><text x="102" y="33" font-family="Inter,Arial,sans-serif" font-size="20" font-weight="700"><tspan fill="#0A1628">sca</tspan><tspan font-size="29" fill="url(#gradL)">l</tspan><tspan font-size="20" fill="#0A1628">ers</tspan></text>';
   var textDark='<text x="48" y="33" font-family="Inter,Arial,sans-serif" font-size="20" font-weight="400" fill="#FFFFFF">latam </text><text x="102" y="33" font-family="Inter,Arial,sans-serif" font-size="20" font-weight="700"><tspan fill="#FFFFFF">sca</tspan><tspan font-size="29" fill="url(#gradL)">l</tspan><tspan font-size="20" fill="#FFFFFF">ers</tspan></text>';
-  if(i===0)return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="'+vb+'" width="220" height="48"><rect width="220" height="48" fill="#FFFFFF"/>'+defsLight+iconPartLight+textLight+'</svg>';
-  if(i===1)return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="'+vb+'" width="220" height="48"><rect width="220" height="48" fill="#0A1628"/>'+defsDark+iconPartDark+textDark+'</svg>';
-  if(i===4)return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="'+vb+'" width="220" height="48"><rect width="220" height="48" fill="#FFFFFF"/>'+iconG+'<rect x="2" y="36" width="10" height="10" rx="3" fill="#0A1628"/><rect x="15" y="22" width="10" height="18" rx="3" fill="#0A1628"/><rect x="28" y="6" width="10" height="28" rx="3" fill="#0A1628"/></g>'+textLight.replace('url(#gradL)','#0A1628')+'</svg>';
-  if(i===5)return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="'+vb+'" width="220" height="48"><rect width="220" height="48" fill="#0A1628"/>'+iconG+'<rect x="2" y="36" width="10" height="10" rx="3" fill="#FFFFFF"/><rect x="15" y="22" width="10" height="18" rx="3" fill="#FFFFFF"/><rect x="28" y="6" width="10" height="28" rx="3" fill="#FFFFFF"/></g>'+textDark.replace('url(#gradL)','#FFFFFF')+'</svg>';
+  if(i===0)return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="'+vb+'" width="220" height="48">'+lockupBg+defsLight+iconPartLight+textLight+'</svg>';
+  if(i===1)return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="'+vb+'" width="220" height="48">'+lockupBg+defsDark+iconPartDark+textDark+'</svg>';
+  if(i===4)return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="'+vb+'" width="220" height="48">'+lockupBg+iconG+'<rect x="2" y="36" width="10" height="10" rx="3" fill="#0A1628"/><rect x="15" y="22" width="10" height="18" rx="3" fill="#0A1628"/><rect x="28" y="6" width="10" height="28" rx="3" fill="#0A1628"/></g>'+textLight.replace('url(#gradL)','#0A1628')+'</svg>';
+  if(i===5)return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="'+vb+'" width="220" height="48">'+lockupBg+iconG+'<rect x="2" y="36" width="10" height="10" rx="3" fill="#FFFFFF"/><rect x="15" y="22" width="10" height="18" rx="3" fill="#FFFFFF"/><rect x="28" y="6" width="10" height="28" rx="3" fill="#FFFFFF"/></g>'+textDark.replace('url(#gradL)','#FFFFFF')+'</svg>';
   return '';
 }
 function dlSVG(i){
@@ -664,7 +673,7 @@ function dlSVG(i){
   setTimeout(function(){document.body.removeChild(a);},300);
 }
 function dlLogoPNG(i){
-  var data=getLogoSVGString(i);
+  var data=getLogoSVGString(i,true);
   if(!data){alert('Download not available for this variant.');return;}
   var names=['lockup-light','lockup-dark','icon-only-light','icon-only-dark','lockup-mono-black','lockup-mono-white'];
   var isLockup=i===0||i===1||i===4||i===5;
@@ -676,6 +685,7 @@ function dlLogoPNG(i){
     canvas.width=w;
     canvas.height=h;
     var ctx=canvas.getContext('2d');
+    ctx.clearRect(0,0,w,h);
     ctx.drawImage(img,0,0,w,h);
     var a=document.createElement('a');
     a.download='latamscalers-'+names[i]+'.png';
