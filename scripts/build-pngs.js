@@ -10,7 +10,7 @@ const sharp = require('sharp');
 
 const ROOT = path.join(__dirname, '..');
 const INDEX_PATH = path.join(ROOT, 'index.html');
-const ASSETS_DIR = path.join(ROOT, 'assets', 'png');
+const ASSETS_DIR = path.join(ROOT, 'png');
 const NAMES = ['lockup-light', 'lockup-dark', 'icon-only-light', 'icon-only-dark', 'lockup-mono-black', 'lockup-mono-white'];
 
 async function generatePngDataUrl(page, i) {
@@ -64,7 +64,7 @@ async function main() {
     const base64 = dataUrl.split(',')[1];
     const buf = Buffer.from(base64, 'base64');
 
-    const outPath = path.join(ASSETS_DIR, 'latamscalers-' + NAMES[i] + '.png');
+    const outPath = path.join(ASSETS_DIR, 'latamscalers-' + NAMES[i] + '-transparent.png');
     await sharp(buf)
       .ensureAlpha()
       .png({ compressionLevel: 6, palette: false })
@@ -80,7 +80,7 @@ async function main() {
   }
 
   await browser.close();
-  console.log('\nDone. PNGs saved to assets/png/');
+  console.log('\nDone. PNGs saved to png/');
 }
 
 main().catch((err) => {

@@ -565,7 +565,7 @@ h+='<div class="chapter-num">Chapter 10</div><h2>Asset Downloads</h2>';
 h+='<p class="chapter-intro">Download logo files and brand assets directly. SVGs are the primary vector format. PNGs have transparent backgrounds for placement on any color.</p>';
 
 h+='<h3>Logo Files</h3>';
-h+='<p class="note" style="margin-bottom:12px">PNGs have <strong>transparent backgrounds</strong> — place on any color. <a href="assets/transparency-proof.html" target="_blank" style="color:var(--aqua)">View proof →</a></p>';
+h+='<p class="note" style="margin-bottom:12px">PNGs have <strong>transparent backgrounds</strong> — place on any color. <a href="transparency-proof.html" target="_blank" style="color:var(--aqua)">View proof →</a></p>';
 h+='<div class="spec-grid">';
 var svgNames=['lockup-light','lockup-dark','icon-only-light','icon-only-dark','lockup-mono-black','lockup-mono-white'];
 ['Lockup — Light','Lockup — Dark','Icon Only','Icon on Midnight','Mono Black','Mono White'].forEach(function(name,i){
@@ -578,10 +578,10 @@ var svgNames=['lockup-light','lockup-dark','icon-only-light','icon-only-dark','l
   if(i===5)h+=lockupMono(40,20,W);
   var svgData=getLogoSVGString(i);
   var dataUri='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svgData);
-  h+='</div><div class="spec-card-label" style="display:flex;flex-wrap:wrap;gap:6px;align-items:center;justify-content:space-between">'+name+'<span style="display:flex;gap:6px"><a href="'+dataUri+'" download="latamscalers-'+svgNames[i]+'.svg" class="copy-btn" style="text-decoration:none;display:inline-block">SVG</a><a href="assets/png/latamscalers-'+svgNames[i]+'.png" download="latamscalers-'+svgNames[i]+'.png" class="copy-btn" style="text-decoration:none;display:inline-block">PNG</a></span></div></div>';
+  h+='</div><div class="spec-card-label" style="display:flex;flex-wrap:wrap;gap:6px;align-items:center;justify-content:space-between">'+name+'<span style="display:flex;gap:6px"><a href="'+dataUri+'" download="latamscalers-'+svgNames[i]+'.svg" class="copy-btn" style="text-decoration:none;display:inline-block">SVG</a><a href="png/latamscalers-'+svgNames[i]+'-transparent.png" download="latamscalers-'+svgNames[i]+'-transparent.png" class="copy-btn" style="text-decoration:none;display:inline-block">PNG</a></span></div></div>';
 });
 h+='</div>';
-h+='<p class="note" style="margin-top:12px"><a href="assets/transparency-proof.html" target="_blank" style="color:'+A+';font-weight:600">View transparency proof</a> — logos placed on multiple backgrounds to confirm PNG compatibility.</p>';
+h+='<p class="note" style="margin-top:12px"><a href="transparency-proof.html" target="_blank" style="color:'+A+';font-weight:600">View transparency proof</a> — logos placed on multiple backgrounds to confirm PNG compatibility.</p>';
 
 h+='<h3>Favicon Package</h3>';
 h+='<p class="note" style="margin-bottom:8px">Click each size to download. SVG favicons are resolution-independent; PNGs are provided for legacy compatibility.</p>';

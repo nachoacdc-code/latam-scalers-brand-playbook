@@ -6,14 +6,14 @@ const path = require('path');
 const fs = require('fs');
 const sharp = require('sharp');
 
-const ASSETS_PNG = path.join(__dirname, 'assets', 'png');
+const ASSETS_PNG = path.join(__dirname, 'png');
 const OUTPUT_DIR = path.join(__dirname, 'test-output');
 const PROOF_HTML = path.join(__dirname, 'assets', 'transparency-proof.html');
 
 async function main() {
   console.log('E2E Test: PNG Transparency\n');
 
-  const pngPath = path.join(ASSETS_PNG, 'latamscalers-lockup-light.png');
+  const pngPath = path.join(ASSETS_PNG, 'latamscalers-lockup-light-transparent.png');
   if (!fs.existsSync(pngPath)) {
     console.error('Pre-built PNG not found. Run: npm run build:png');
     process.exit(1);
@@ -50,7 +50,7 @@ async function main() {
 
   console.log('\n--- PASS ---\n');
   console.log('PNG is transparent (RGBA, ' + transparentCount + ' transparent pixels).');
-  console.log('Visual proof: Open assets/transparency-proof.html in a browser.');
+  console.log('Visual proof: Open transparency-proof.html in a browser.');
   console.log('  PNG: ' + pngPath);
   console.log('  Proof page: ' + PROOF_HTML);
 }
