@@ -584,6 +584,53 @@ var svgNames=['lockup-light','lockup-dark','icon-only-light','icon-only-dark','l
 h+='</div>';
 h+='<p class="note" style="margin-top:12px"><a href="transparency-proof.html" target="_blank" style="color:'+A+';font-weight:600">View transparency proof</a> — logos placed on multiple backgrounds to confirm PNG compatibility.</p>';
 
+h+='<h3>Social Media Assets</h3>';
+h+='<p class="note" style="margin-bottom:16px">All assets use <strong>light backgrounds</strong> — optimized for LinkedIn\'s white feed, Twitter/X light mode, Slack, Notion, and WhatsApp. PNGs are generated at full resolution in your browser on demand.</p>';
+
+h+='<h4>Avatars</h4>';
+h+='<p class="note" style="margin-bottom:12px">Circle and rounded-square crops at platform-native sizes. Aqua ring border, icon mark centered.</p>';
+h+='<div class="spec-grid">';
+h+='<div class="spec-card"><div class="spec-card-body" style="background:'+W+'"><div style="width:80px;height:80px;border-radius:50%;background:'+W+';border:3.5px solid '+A+';display:flex;align-items:center;justify-content:center">'+icon(46,false)+'</div></div><div class="spec-card-label" style="display:flex;flex-wrap:wrap;gap:6px;align-items:center;justify-content:space-between"><span>LinkedIn Avatar<br><span style="font-weight:400;color:'+S4+'">400 × 400 px</span></span><button class="copy-btn" onclick="dlSocialPNG(\'li-avatar\')">&#8595; PNG</button></div></div>';
+h+='<div class="spec-card"><div class="spec-card-body" style="background:'+W+'"><div style="width:80px;height:80px;border-radius:50%;background:'+W+';border:3.5px solid '+A+';display:flex;align-items:center;justify-content:center">'+icon(46,false)+'</div></div><div class="spec-card-label" style="display:flex;flex-wrap:wrap;gap:6px;align-items:center;justify-content:space-between"><span>Twitter / X Avatar<br><span style="font-weight:400;color:'+S4+'">400 × 400 px</span></span><button class="copy-btn" onclick="dlSocialPNG(\'tw-avatar\')">&#8595; PNG</button></div></div>';
+h+='<div class="spec-card"><div class="spec-card-body" style="background:'+W+'"><div style="width:80px;height:80px;border-radius:16px;background:'+W+';border:3.5px solid '+A+';display:flex;align-items:center;justify-content:center">'+icon(46,false)+'</div></div><div class="spec-card-label" style="display:flex;flex-wrap:wrap;gap:6px;align-items:center;justify-content:space-between"><span>Slack / Notion Avatar<br><span style="font-weight:400;color:'+S4+'">512 × 512 px</span></span><button class="copy-btn" onclick="dlSocialPNG(\'slack-avatar\')">&#8595; PNG</button></div></div>';
+h+='<div class="spec-card"><div class="spec-card-body" style="background:'+W+'"><div style="width:80px;height:80px;border-radius:50%;background:'+W+';border:3.5px solid '+A+';display:flex;align-items:center;justify-content:center">'+icon(46,false)+'</div></div><div class="spec-card-label" style="display:flex;flex-wrap:wrap;gap:6px;align-items:center;justify-content:space-between"><span>WhatsApp Avatar<br><span style="font-weight:400;color:'+S4+'">512 × 512 px</span></span><button class="copy-btn" onclick="dlSocialPNG(\'wa-avatar\')">&#8595; PNG</button></div></div>';
+h+='</div>';
+
+h+='<h4 style="margin-top:28px">LinkedIn Banners (1584 × 396)</h4>';
+h+='<p class="note" style="margin-bottom:14px">Two options. Option A is minimal — logo centered on white. Option B is editorial: headline-first layout designed for B2B first impressions, with the lockup anchored bottom-left and a decorative ascending-bars watermark.</p>';
+
+h+='<div style="margin-bottom:14px;background:'+W+';border:1px solid '+S2+';border-radius:10px;overflow:hidden">';
+h+='<div style="min-height:80px;display:flex;align-items:center;justify-content:center;position:relative;padding:16px 24px">';
+h+=lockup(36,18,false);
+h+='<div style="position:absolute;bottom:0;left:0;right:0;height:5px;background:linear-gradient(90deg,'+M+','+A+')"></div></div>';
+h+='<div style="background:'+W+';border-top:1px solid '+S2+';padding:8px 16px;display:flex;align-items:center;justify-content:space-between">';
+h+='<span style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:'+S4+'">Option A — Logo Only &nbsp;<span style="font-weight:400;color:'+S4+'">1584 × 396 px</span></span>';
+h+='<button class="copy-btn" onclick="dlSocialPNG(\'li-banner-a\')">&#8595; PNG</button></div></div>';
+
+h+='<div style="margin-bottom:14px;background:'+W+';border:1px solid '+S2+';border-radius:10px;overflow:hidden">';
+h+='<div style="min-height:90px;display:flex;align-items:center;position:relative;padding:14px 24px 14px 0">';
+h+='<div style="position:absolute;left:0;top:0;bottom:0;width:6px;background:linear-gradient(to bottom,'+M+','+A+')"></div>';
+h+='<div style="padding-left:22px;flex:1"><div style="font-family:Inter,sans-serif;font-size:15px;font-weight:700;color:'+M+';line-height:1.25;letter-spacing:-.3px">Scale Fast with Elite LATAM Talent</div>';
+h+='<div style="font-size:11px;color:'+S6+';margin-top:5px;line-height:1.4">From one expert to full teams — matched in less than a week</div>';
+h+='<div style="margin-top:10px">'+lockup(18,9,false)+'</div></div>';
+h+='<div style="position:absolute;right:18px;top:50%;transform:translateY(-50%);opacity:.08">'+icon(64,false)+'</div>';
+h+='<div style="position:absolute;bottom:0;left:0;right:0;height:4px;background:linear-gradient(90deg,'+M+','+A+')"></div></div>';
+h+='<div style="background:'+W+';border-top:1px solid '+S2+';padding:8px 16px;display:flex;align-items:center;justify-content:space-between">';
+h+='<span style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:'+S4+'">Option B — Scale Fast Tagline &nbsp;<span style="font-weight:400;color:'+S4+'">1584 × 396 px</span></span>';
+h+='<button class="copy-btn" onclick="dlSocialPNG(\'li-banner-b\')">&#8595; PNG</button></div></div>';
+
+h+='<h4 style="margin-top:28px">Twitter / X Banner (1500 × 500)</h4>';
+h+='<div style="margin-bottom:14px;background:'+W+';border:1px solid '+S2+';border-radius:10px;overflow:hidden">';
+h+='<div style="min-height:80px;display:flex;align-items:center;justify-content:center;position:relative;padding:16px 24px">';
+h+=lockup(36,18,false);
+h+='<div style="position:absolute;right:20px;top:50%;transform:translateY(-50%);opacity:.06">'+icon(64,false)+'</div>';
+h+='<div style="position:absolute;bottom:0;left:0;right:0;height:5px;background:linear-gradient(90deg,'+M+','+A+')"></div></div>';
+h+='<div style="background:'+W+';border-top:1px solid '+S2+';padding:8px 16px;display:flex;align-items:center;justify-content:space-between">';
+h+='<span style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:'+S4+'">Twitter / X Banner &nbsp;<span style="font-weight:400;color:'+S4+'">1500 × 500 px</span></span>';
+h+='<button class="copy-btn" onclick="dlSocialPNG(\'tw-banner\')">&#8595; PNG</button></div></div>';
+
+h+='<p class="note" style="margin-top:4px"><strong>Platform notes:</strong> LinkedIn and WhatsApp crop avatars to a circle — safe zone is the inner 80% of the frame. Slack and Notion use a rounded square. All PNGs have white backgrounds for universal compatibility.</p>';
+
 h+='<h3>Favicon Package</h3>';
 h+='<p class="note" style="margin-bottom:8px">Click each size to download. SVG favicons are resolution-independent; PNGs are provided for legacy compatibility.</p>';
 h+='<div id="fav-links" style="display:flex;flex-wrap:wrap;gap:8px;margin:8px 0"></div>';
@@ -701,6 +748,158 @@ function dlLogoPNG(i){
   img.onerror=function(){alert('PNG generation failed. Try downloading the SVG instead.');};
   img.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(data);
 }
+// ── SOCIAL MEDIA PNG GENERATOR ──
+function dlSocialPNG(type){
+  var configs={
+    'li-avatar':{w:400,h:400,name:'latamscalers-linkedin-avatar-light'},
+    'li-banner-a':{w:1584,h:396,name:'latamscalers-linkedin-banner-logo'},
+    'li-banner-b':{w:1584,h:396,name:'latamscalers-linkedin-banner-tagline'},
+    'tw-avatar':{w:400,h:400,name:'latamscalers-twitter-avatar-light'},
+    'tw-banner':{w:1500,h:500,name:'latamscalers-twitter-banner-light'},
+    'slack-avatar':{w:512,h:512,name:'latamscalers-slack-notion-avatar-light'},
+    'wa-avatar':{w:512,h:512,name:'latamscalers-whatsapp-avatar-light'}
+  };
+  var cfg=configs[type];if(!cfg)return;
+  var canvas=document.createElement('canvas');
+  canvas.width=cfg.w;canvas.height=cfg.h;
+  var ctx=canvas.getContext('2d');
+  Promise.all([
+    document.fonts.load('400 64px Inter'),
+    document.fonts.load('700 64px Inter')
+  ]).then(function(){
+    _drawSocialAsset(ctx,type,cfg.w,cfg.h);
+    _triggerSocialDL(canvas,cfg.name);
+  }).catch(function(){
+    _drawSocialAsset(ctx,type,cfg.w,cfg.h);
+    _triggerSocialDL(canvas,cfg.name);
+  });
+}
+function _triggerSocialDL(canvas,name){
+  var a=document.createElement('a');
+  a.download=name+'.png';
+  a.href=canvas.toDataURL('image/png');
+  a.style.display='none';
+  document.body.appendChild(a);a.click();
+  setTimeout(function(){document.body.removeChild(a);},300);
+}
+function _rrect(ctx,x,y,w,h,r,fillStyle){
+  ctx.beginPath();ctx.moveTo(x+r,y);ctx.lineTo(x+w-r,y);
+  ctx.quadraticCurveTo(x+w,y,x+w,y+r);ctx.lineTo(x+w,y+h-r);
+  ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);ctx.lineTo(x+r,y+h);
+  ctx.quadraticCurveTo(x,y+h,x,y+h-r);ctx.lineTo(x,y+r);
+  ctx.quadraticCurveTo(x,y,x+r,y);ctx.closePath();
+  ctx.fillStyle=fillStyle;ctx.fill();
+}
+function _drawIcon(ctx,cx,cy,size,dark){
+  // 3 ascending bars, proportions from viewBox 0 0 42 48
+  var sc=size/48;
+  var tx=cx-21*sc,ty=cy-24*sc;
+  var Mc='#0A1628',Ac='#5EEAD4',S4c='#94A3B8';
+  var c1=dark?S4c:Mc;
+  // Bar 1 — short, bottom-left
+  _rrect(ctx,tx+2*sc,ty+36*sc,10*sc,10*sc,3*sc,c1);
+  // Bar 2 — medium, gradient bottom→top (Midnight/Slate → Aqua)
+  var grd=ctx.createLinearGradient(0,ty+40*sc,0,ty+22*sc);
+  grd.addColorStop(0,dark?S4c:Mc);grd.addColorStop(1,Ac);
+  _rrect(ctx,tx+15*sc,ty+22*sc,10*sc,18*sc,3*sc,grd);
+  // Bar 3 — tall, Aqua
+  _rrect(ctx,tx+28*sc,ty+6*sc,10*sc,28*sc,3*sc,Ac);
+}
+function _drawLockup(ctx,x,y,iconSize,dark,align){
+  var Mc='#0A1628',Wc='#FFFFFF';
+  var textColor=dark?Wc:Mc;
+  var wmSz=Math.round(iconSize*0.46);
+  var iconW=iconSize*0.875;
+  var gap=iconSize*0.32;
+  ctx.font='400 '+wmSz+'px Inter,Arial,sans-serif';
+  var latamW=ctx.measureText('latam ').width;
+  ctx.font='700 '+wmSz+'px Inter,Arial,sans-serif';
+  var scalersW=ctx.measureText('scalers').width;
+  var totalW=iconW+gap+latamW+scalersW;
+  var sx=align==='center'?x-totalW/2:x;
+  _drawIcon(ctx,sx+iconW/2,y,iconSize,dark);
+  ctx.textBaseline='middle';ctx.textAlign='left';
+  var textX=sx+iconW+gap;
+  ctx.font='400 '+wmSz+'px Inter,Arial,sans-serif';
+  ctx.fillStyle=textColor;ctx.fillText('latam ',textX,y);
+  ctx.font='700 '+wmSz+'px Inter,Arial,sans-serif';
+  ctx.fillStyle=textColor;ctx.fillText('scalers',textX+latamW,y);
+}
+function _drawSocialAsset(ctx,type,w,h){
+  var Mc='#0A1628',Ac='#5EEAD4',S6c='#475569',Wc='#FFFFFF';
+  // White background
+  ctx.fillStyle=Wc;ctx.fillRect(0,0,w,h);
+
+  if(type==='li-avatar'||type==='tw-avatar'||type==='wa-avatar'){
+    var cx=w/2,cy=h/2,r=w*0.44;
+    ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);
+    ctx.fillStyle=Wc;ctx.fill();
+    ctx.strokeStyle=Ac;ctx.lineWidth=Math.round(w*0.024);ctx.stroke();
+    _drawIcon(ctx,cx,cy,w*0.4,false);
+  }
+  else if(type==='slack-avatar'){
+    var pad=w*0.05,rad=w*0.14;
+    var rx=pad,ry=pad,rw=w-pad*2,rh=h-pad*2;
+    ctx.beginPath();ctx.moveTo(rx+rad,ry);ctx.lineTo(rx+rw-rad,ry);
+    ctx.quadraticCurveTo(rx+rw,ry,rx+rw,ry+rad);ctx.lineTo(rx+rw,ry+rh-rad);
+    ctx.quadraticCurveTo(rx+rw,ry+rh,rx+rw-rad,ry+rh);ctx.lineTo(rx+rad,ry+rh);
+    ctx.quadraticCurveTo(rx,ry+rh,rx,ry+rh-rad);ctx.lineTo(rx,ry+rad);
+    ctx.quadraticCurveTo(rx,ry,rx+rad,ry);ctx.closePath();
+    ctx.fillStyle=Wc;ctx.fill();
+    ctx.strokeStyle=Ac;ctx.lineWidth=Math.round(w*0.02);ctx.stroke();
+    _drawIcon(ctx,w/2,h/2,w*0.42,false);
+  }
+  else if(type==='li-banner-a'){
+    _drawLockup(ctx,w/2,h/2,h*0.22,false,'center');
+    var grad=ctx.createLinearGradient(0,0,w,0);
+    grad.addColorStop(0,Mc);grad.addColorStop(1,Ac);
+    ctx.fillStyle=grad;ctx.fillRect(0,h-8,w,8);
+  }
+  else if(type==='tw-banner'){
+    ctx.globalAlpha=0.05;
+    _drawIcon(ctx,w*0.82,h*0.5,h*0.7,false);
+    ctx.globalAlpha=1;
+    _drawLockup(ctx,w/2,h/2,h*0.22,false,'center');
+    var grad3=ctx.createLinearGradient(0,0,w,0);
+    grad3.addColorStop(0,Mc);grad3.addColorStop(1,Ac);
+    ctx.fillStyle=grad3;ctx.fillRect(0,h-8,w,8);
+  }
+  else if(type==='li-banner-b'){
+    // Left vertical accent bar
+    var vg=ctx.createLinearGradient(0,0,0,h);
+    vg.addColorStop(0,Mc);vg.addColorStop(1,Ac);
+    ctx.fillStyle=vg;ctx.fillRect(0,0,8,h);
+    // Decorative icon — right-center, very faint
+    ctx.globalAlpha=0.055;
+    _drawIcon(ctx,w*0.84,h*0.5,h*0.84,false);
+    ctx.globalAlpha=1;
+    // Headline
+    var textX=100;
+    var headSz=Math.round(h*0.164);
+    ctx.font='700 '+headSz+'px Inter,Arial,sans-serif';
+    ctx.fillStyle=Mc;ctx.textAlign='left';ctx.textBaseline='alphabetic';
+    ctx.fillText('Scale Fast with Elite LATAM Talent',textX,Math.round(h*0.41));
+    // Fading aqua rule below headline
+    var lineY=Math.round(h*0.50);
+    var lineLen=Math.round(w*0.36);
+    var lg2=ctx.createLinearGradient(textX,0,textX+lineLen,0);
+    lg2.addColorStop(0,Ac);lg2.addColorStop(1,'rgba(94,234,212,0)');
+    ctx.strokeStyle=lg2;ctx.lineWidth=2;
+    ctx.beginPath();ctx.moveTo(textX,lineY);ctx.lineTo(textX+lineLen,lineY);ctx.stroke();
+    // Subline
+    var subSz=Math.round(h*0.069);
+    ctx.font='400 '+subSz+'px Inter,Arial,sans-serif';
+    ctx.fillStyle=S6c;
+    ctx.fillText('From one expert to full teams\u2014matched in less than a week',textX,Math.round(h*0.635));
+    // Lockup bottom-left
+    _drawLockup(ctx,textX,Math.round(h*0.855),Math.round(h*0.105),false,'left');
+    // Bottom gradient stripe
+    var bg2=ctx.createLinearGradient(0,0,w,0);
+    bg2.addColorStop(0,Mc);bg2.addColorStop(1,Ac);
+    ctx.fillStyle=bg2;ctx.fillRect(0,h-6,w,6);
+  }
+}
+
 function buildFaviconLinks(){
   var container=document.getElementById('fav-links');
   container.innerHTML='<span style="font-size:11px;color:#94A3B8">Generating...</span>';
