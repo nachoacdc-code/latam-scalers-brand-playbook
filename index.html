@@ -587,13 +587,21 @@ h+='<p class="note" style="margin-top:12px"><a href="transparency-proof.html" ta
 h+='<h3>Social Media Assets</h3>';
 h+='<p class="note" style="margin-bottom:16px">All assets use <strong>light backgrounds</strong> — optimized for LinkedIn\'s white feed, Twitter/X light mode, Slack, Notion, and WhatsApp. PNGs are generated at full resolution in your browser on demand.</p>';
 
-h+='<h4>Avatars</h4>';
+h+='<h4>Avatars — With Ring</h4>';
 h+='<p class="note" style="margin-bottom:12px">Circle and rounded-square crops at platform-native sizes. Aqua ring border, icon mark centered.</p>';
 h+='<div class="spec-grid">';
 h+='<div class="spec-card"><div class="spec-card-body" style="background:'+W+'"><div style="width:80px;height:80px;border-radius:50%;background:'+W+';border:3.5px solid '+A+';display:flex;align-items:center;justify-content:center">'+icon(46,false)+'</div></div><div class="spec-card-label" style="display:flex;flex-wrap:wrap;gap:6px;align-items:center;justify-content:space-between"><span>LinkedIn Avatar<br><span style="font-weight:400;color:'+S4+'">400 × 400 px</span></span><button class="copy-btn" onclick="dlSocialPNG(\'li-avatar\')">&#8595; PNG</button></div></div>';
 h+='<div class="spec-card"><div class="spec-card-body" style="background:'+W+'"><div style="width:80px;height:80px;border-radius:50%;background:'+W+';border:3.5px solid '+A+';display:flex;align-items:center;justify-content:center">'+icon(46,false)+'</div></div><div class="spec-card-label" style="display:flex;flex-wrap:wrap;gap:6px;align-items:center;justify-content:space-between"><span>Twitter / X Avatar<br><span style="font-weight:400;color:'+S4+'">400 × 400 px</span></span><button class="copy-btn" onclick="dlSocialPNG(\'tw-avatar\')">&#8595; PNG</button></div></div>';
 h+='<div class="spec-card"><div class="spec-card-body" style="background:'+W+'"><div style="width:80px;height:80px;border-radius:16px;background:'+W+';border:3.5px solid '+A+';display:flex;align-items:center;justify-content:center">'+icon(46,false)+'</div></div><div class="spec-card-label" style="display:flex;flex-wrap:wrap;gap:6px;align-items:center;justify-content:space-between"><span>Slack / Notion Avatar<br><span style="font-weight:400;color:'+S4+'">512 × 512 px</span></span><button class="copy-btn" onclick="dlSocialPNG(\'slack-avatar\')">&#8595; PNG</button></div></div>';
 h+='<div class="spec-card"><div class="spec-card-body" style="background:'+W+'"><div style="width:80px;height:80px;border-radius:50%;background:'+W+';border:3.5px solid '+A+';display:flex;align-items:center;justify-content:center">'+icon(46,false)+'</div></div><div class="spec-card-label" style="display:flex;flex-wrap:wrap;gap:6px;align-items:center;justify-content:space-between"><span>WhatsApp Avatar<br><span style="font-weight:400;color:'+S4+'">512 × 512 px</span></span><button class="copy-btn" onclick="dlSocialPNG(\'wa-avatar\')">&#8595; PNG</button></div></div>';
+h+='</div>';
+
+h+='<h4 style="margin-top:24px">Avatars — Flat (No Shape)</h4>';
+h+='<p class="note" style="margin-bottom:12px">Unframed icon on clean background — for platforms where the UI provides the crop shape (Google Workspace, LinkedIn feed profile, light-mode Slack). Matches the approach used in the Digital Applications light-background set.</p>';
+h+='<div class="spec-grid">';
+h+='<div class="spec-card"><div class="spec-card-body" style="background:'+W+'">'+icon(46,false)+'</div><div class="spec-card-label" style="display:flex;flex-wrap:wrap;gap:6px;align-items:center;justify-content:space-between"><span>LinkedIn / X — Flat White<br><span style="font-weight:400;color:'+S4+'">400 × 400 px</span></span><button class="copy-btn" onclick="dlSocialPNG(\'li-avatar-flat\')">&#8595; PNG</button></div></div>';
+h+='<div class="spec-card"><div class="spec-card-body" style="background:'+T50+'">'+icon(46,false)+'</div><div class="spec-card-label" style="display:flex;flex-wrap:wrap;gap:6px;align-items:center;justify-content:space-between"><span>Slack / Notion — Teal Tint<br><span style="font-weight:400;color:'+S4+'">512 × 512 px</span></span><button class="copy-btn" onclick="dlSocialPNG(\'slack-avatar-flat\')">&#8595; PNG</button></div></div>';
+h+='<div class="spec-card"><div class="spec-card-body" style="background:'+W+'">'+icon(46,false)+'</div><div class="spec-card-label" style="display:flex;flex-wrap:wrap;gap:6px;align-items:center;justify-content:space-between"><span>WhatsApp — Flat White<br><span style="font-weight:400;color:'+S4+'">512 × 512 px</span></span><button class="copy-btn" onclick="dlSocialPNG(\'wa-avatar-flat\')">&#8595; PNG</button></div></div>';
 h+='</div>';
 
 h+='<h4 style="margin-top:28px">LinkedIn Banners (1584 × 396)</h4>';
@@ -608,12 +616,12 @@ h+='<span style="font-size:10px;font-weight:600;text-transform:uppercase;letter-
 h+='<button class="copy-btn" onclick="dlSocialPNG(\'li-banner-a\')">&#8595; PNG</button></div></div>';
 
 h+='<div style="margin-bottom:14px;background:'+W+';border:1px solid '+S2+';border-radius:10px;overflow:hidden">';
-h+='<div style="min-height:90px;display:flex;align-items:center;position:relative;padding:14px 24px 14px 0">';
+h+='<div style="min-height:90px;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;padding:18px 36px 22px">';
 h+='<div style="position:absolute;left:0;top:0;bottom:0;width:6px;background:linear-gradient(to bottom,'+M+','+A+')"></div>';
-h+='<div style="padding-left:22px;flex:1"><div style="font-family:Inter,sans-serif;font-size:15px;font-weight:700;color:'+M+';line-height:1.25;letter-spacing:-.3px">Scale Fast with Elite LATAM Talent</div>';
-h+='<div style="font-size:11px;color:'+S6+';margin-top:5px;line-height:1.4">From one expert to full teams — matched in less than a week</div>';
-h+='<div style="margin-top:10px">'+lockup(18,9,false)+'</div></div>';
-h+='<div style="position:absolute;right:18px;top:50%;transform:translateY(-50%);opacity:.08">'+icon(64,false)+'</div>';
+h+='<div style="text-align:center"><div style="font-family:Inter,sans-serif;font-size:15px;font-weight:700;color:'+M+';line-height:1.25;letter-spacing:-.3px">Scale Fast with Elite LATAM Talent</div>';
+h+='<div style="font-size:11px;color:'+S6+';margin-top:5px;line-height:1.4">From one expert to full teams, matched in less than a week</div>';
+h+='<div style="margin-top:10px;display:flex;justify-content:center">'+lockup(18,9,false)+'</div></div>';
+h+='<div style="position:absolute;right:18px;top:50%;transform:translateY(-50%);opacity:.06">'+icon(64,false)+'</div>';
 h+='<div style="position:absolute;bottom:0;left:0;right:0;height:4px;background:linear-gradient(90deg,'+M+','+A+')"></div></div>';
 h+='<div style="background:'+W+';border-top:1px solid '+S2+';padding:8px 16px;display:flex;align-items:center;justify-content:space-between">';
 h+='<span style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:'+S4+'">Option B — Scale Fast Tagline &nbsp;<span style="font-weight:400;color:'+S4+'">1584 × 396 px</span></span>';
@@ -752,12 +760,15 @@ function dlLogoPNG(i){
 function dlSocialPNG(type){
   var configs={
     'li-avatar':{w:400,h:400,name:'latamscalers-linkedin-avatar-light'},
+    'li-avatar-flat':{w:400,h:400,name:'latamscalers-linkedin-avatar-flat'},
     'li-banner-a':{w:1584,h:396,name:'latamscalers-linkedin-banner-logo'},
     'li-banner-b':{w:1584,h:396,name:'latamscalers-linkedin-banner-tagline'},
     'tw-avatar':{w:400,h:400,name:'latamscalers-twitter-avatar-light'},
     'tw-banner':{w:1500,h:500,name:'latamscalers-twitter-banner-light'},
     'slack-avatar':{w:512,h:512,name:'latamscalers-slack-notion-avatar-light'},
-    'wa-avatar':{w:512,h:512,name:'latamscalers-whatsapp-avatar-light'}
+    'slack-avatar-flat':{w:512,h:512,name:'latamscalers-slack-notion-avatar-flat'},
+    'wa-avatar':{w:512,h:512,name:'latamscalers-whatsapp-avatar-light'},
+    'wa-avatar-flat':{w:512,h:512,name:'latamscalers-whatsapp-avatar-flat'}
   };
   var cfg=configs[type];if(!cfg)return;
   var canvas=document.createElement('canvas');
@@ -869,34 +880,48 @@ function _drawSocialAsset(ctx,type,w,h){
     var vg=ctx.createLinearGradient(0,0,0,h);
     vg.addColorStop(0,Mc);vg.addColorStop(1,Ac);
     ctx.fillStyle=vg;ctx.fillRect(0,0,8,h);
-    // Decorative icon — right-center, very faint
-    ctx.globalAlpha=0.055;
-    _drawIcon(ctx,w*0.84,h*0.5,h*0.84,false);
+    // Decorative icon — right third, very faint
+    ctx.globalAlpha=0.05;
+    _drawIcon(ctx,w*0.78,h*0.5,h*0.9,false);
     ctx.globalAlpha=1;
+    // All text centered at w/2
+    var cx=w/2;
     // Headline
-    var textX=100;
     var headSz=Math.round(h*0.164);
     ctx.font='700 '+headSz+'px Inter,Arial,sans-serif';
-    ctx.fillStyle=Mc;ctx.textAlign='left';ctx.textBaseline='alphabetic';
-    ctx.fillText('Scale Fast with Elite LATAM Talent',textX,Math.round(h*0.41));
-    // Fading aqua rule below headline
-    var lineY=Math.round(h*0.50);
-    var lineLen=Math.round(w*0.36);
-    var lg2=ctx.createLinearGradient(textX,0,textX+lineLen,0);
-    lg2.addColorStop(0,Ac);lg2.addColorStop(1,'rgba(94,234,212,0)');
+    ctx.fillStyle=Mc;ctx.textAlign='center';ctx.textBaseline='alphabetic';
+    ctx.fillText('Scale Fast with Elite LATAM Talent',cx,Math.round(h*0.41));
+    // Centered fading aqua rule
+    var lineY=Math.round(h*0.505);
+    var lineLen=Math.round(w*0.32);
+    var lg2=ctx.createLinearGradient(cx-lineLen/2,0,cx+lineLen/2,0);
+    lg2.addColorStop(0,'rgba(94,234,212,0)');
+    lg2.addColorStop(0.5,Ac);
+    lg2.addColorStop(1,'rgba(94,234,212,0)');
     ctx.strokeStyle=lg2;ctx.lineWidth=2;
-    ctx.beginPath();ctx.moveTo(textX,lineY);ctx.lineTo(textX+lineLen,lineY);ctx.stroke();
-    // Subline
+    ctx.beginPath();ctx.moveTo(cx-lineLen/2,lineY);ctx.lineTo(cx+lineLen/2,lineY);ctx.stroke();
+    // Subline centered
     var subSz=Math.round(h*0.069);
     ctx.font='400 '+subSz+'px Inter,Arial,sans-serif';
-    ctx.fillStyle=S6c;
-    ctx.fillText('From one expert to full teams\u2014matched in less than a week',textX,Math.round(h*0.635));
-    // Lockup bottom-left
-    _drawLockup(ctx,textX,Math.round(h*0.855),Math.round(h*0.105),false,'left');
+    ctx.fillStyle=S6c;ctx.textAlign='center';
+    ctx.fillText('From one expert to full teams, matched in less than a week',cx,Math.round(h*0.635));
+    // Lockup centered
+    _drawLockup(ctx,cx,Math.round(h*0.855),Math.round(h*0.105),false,'center');
     // Bottom gradient stripe
     var bg2=ctx.createLinearGradient(0,0,w,0);
     bg2.addColorStop(0,Mc);bg2.addColorStop(1,Ac);
     ctx.fillStyle=bg2;ctx.fillRect(0,h-6,w,6);
+  }
+  else if(type==='li-avatar-flat'||type==='wa-avatar-flat'){
+    _drawIcon(ctx,w/2,h/2,w*0.42,false);
+    // Subtle bottom gradient accent
+    var gf=ctx.createLinearGradient(0,0,w,0);
+    gf.addColorStop(0,Mc);gf.addColorStop(1,Ac);
+    ctx.fillStyle=gf;ctx.fillRect(0,h-Math.round(h*0.015),w,Math.round(h*0.015));
+  }
+  else if(type==='slack-avatar-flat'){
+    ctx.fillStyle='#F0FDFA';ctx.fillRect(0,0,w,h);
+    _drawIcon(ctx,w/2,h/2,w*0.42,false);
   }
 }
 
