@@ -14,6 +14,50 @@ const INDEX_PATH = path.join(ROOT, 'index.html');
 const ASSETS_DIR = path.join(ROOT, 'png');
 const NAMES = ['lockup-light', 'lockup-dark', 'icon-only-light', 'icon-only-dark', 'lockup-mono-black', 'lockup-mono-white'];
 
+/**
+ * Generate SVG for LinkedIn Company Page banner (4200×700, transparent, lockup centered)
+ */
+function generateLinkedInCompanyBannerSVG() {
+  const W = 4200;
+  const H = 700;
+  // Lockup SVG viewBox is 220×48, scale to ~40% of banner height for good visibility
+  // This gives clear space of ~30% on top/bottom, well above the 0.5x minimum
+  const lockupScale = (H * 0.40) / 48; // ~5.83
+  const lockupW = 220 * lockupScale;
+  const lockupH = 48 * lockupScale;
+  const lockupX = (W - lockupW) / 2;
+  const lockupY = (H - lockupH) / 2;
+
+  const fontFace = `@font-face{font-family:Inter;font-style:normal;font-weight:400 700;font-display:swap;src:url(https://fonts.gstatic.com/s/inter/v18/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuLyfAZ9hjp-Ek-_EeA.woff2) format("woff2");}`;
+
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}">
+  <defs>
+    <style type="text/css">${fontFace}</style>
+    <linearGradient id="gradL" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="#0A1628"/>
+      <stop offset="100%" stop-color="#5EEAD4"/>
+    </linearGradient>
+    <linearGradient id="gradIcon" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="#0A1628"/>
+      <stop offset="100%" stop-color="#5EEAD4"/>
+    </linearGradient>
+  </defs>
+  <g transform="translate(${lockupX}, ${lockupY}) scale(${lockupScale})">
+    <g transform="translate(0,0) scale(0.952)">
+      <rect x="2" y="36" width="10" height="10" rx="3" fill="#0A1628"/>
+      <rect x="15" y="22" width="10" height="18" rx="3" fill="url(#gradIcon)"/>
+      <rect x="28" y="6" width="10" height="28" rx="3" fill="#5EEAD4"/>
+    </g>
+    <text x="48" y="33" font-family="Inter,Arial,sans-serif" font-size="20" font-weight="400" fill="#0A1628">latam </text>
+    <text x="102" y="33" font-family="Inter,Arial,sans-serif" font-size="20" font-weight="700">
+      <tspan fill="#0A1628">sca</tspan>
+      <tspan font-size="29" fill="url(#gradL)">l</tspan>
+      <tspan font-size="20" fill="#0A1628">ers</tspan>
+    </text>
+  </g>
+</svg>`;
+}
+
 async function main() {
   console.log('Building transparent PNG logos (sharp/librsvg)...\n');
 
@@ -83,6 +127,28 @@ async function main() {
       if (data[j] < 255) transparentCount++;
     }
     console.log('    OK: ' + meta.width + 'x' + meta.height + ', ' + transparentCount + ' transparent pixels');
+  }
+
+  // Build LinkedIn Company Page Banner (4200×700 transparent)
+  console.log('\n  linkedin-company-banner-light-transparent.png...');
+  const bannerSvg = generateLinkedInCompanyBannerSVG();
+  const bannerOutPath = path.join(ASSETS_DIR, 'latamscalers-linkedin-company-banner-light-transparent.png');
+  
+  try {
+    await sharp(Buffer.from(bannerSvg, 'utf8'))
+      .png({ compressionLevel: 6, palette: false })
+      .toFile(bannerOutPath);
+
+    const bannerMeta = await sharp(bannerOutPath).metadata();
+    const { data: bannerData } = await sharp(bannerOutPath).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
+    let bannerTransparentCount = 0;
+    for (let j = 3; j < bannerData.length; j += 4) {
+      if (bannerData[j] < 255) bannerTransparentCount++;
+    }
+    const fileSizeKB = Math.round(fs.statSync(bannerOutPath).size / 1024);
+    console.log('    OK: ' + bannerMeta.width + 'x' + bannerMeta.height + ', ' + bannerTransparentCount + ' transparent pixels, ' + fileSizeKB + ' KB');
+  } catch (err) {
+    console.error('    FAIL: ' + err.message);
   }
 
   await browser.close();
