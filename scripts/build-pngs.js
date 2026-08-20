@@ -99,6 +99,51 @@ function generateLinkedInCompanyBannerTaglineSVG() {
 </svg>`;
 }
 
+/**
+ * Generate SVG for LinkedIn Company Page banner with tagline on soft-aqua background (4200×700)
+ * Uses Teal-50 (#F0FDFA) translucent wash for subtle contrast without conflicting with LinkedIn logo
+ * Tagline: "Your dedicated Creative team, on-demand"
+ */
+function generateLinkedInCompanyBannerTaglineAquaSVG() {
+  const W = 4200;
+  const H = 700;
+  const centerX = W / 2;
+  const centerY = H / 2;
+  
+  // Font sizes optimized for 4200×700 banner
+  const mainFontSize = 96;
+  
+  const fontFace = `@font-face{font-family:Inter;font-style:normal;font-weight:300 700;font-display:swap;src:url(https://fonts.gstatic.com/s/inter/v18/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuLyfAZ9hjp-Ek-_EeA.woff2) format("woff2");}`;
+
+  // Brand colors
+  const midnight = '#0A1628';
+  const aqua = '#5EEAD4';
+  // Teal-50 from Tailwind palette - very light, subtle wash
+  const teal50 = '#F0FDFA';
+
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}">
+  <defs>
+    <style type="text/css">${fontFace}</style>
+    <linearGradient id="textGradAqua" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="${midnight}"/>
+      <stop offset="100%" stop-color="${aqua}"/>
+    </linearGradient>
+  </defs>
+  <!-- Soft translucent teal-50 background wash -->
+  <rect x="0" y="0" width="${W}" height="${H}" fill="${teal50}"/>
+  <text x="${centerX}" y="${centerY}" 
+        font-family="Inter,Arial,sans-serif" 
+        text-anchor="middle" 
+        dominant-baseline="middle"
+        letter-spacing="-2"
+        font-size="${mainFontSize}">
+    <tspan font-weight="400" fill="${midnight}">Your dedicated</tspan>
+    <tspan font-weight="700" fill="url(#textGradAqua)"> Creative </tspan>
+    <tspan font-weight="400" fill="${midnight}">team, on-demand</tspan>
+  </text>
+</svg>`;
+}
+
 async function main() {
   console.log('Building transparent PNG logos (sharp/librsvg)...\n');
 
@@ -210,6 +255,23 @@ async function main() {
     }
     const taglineFileSizeKB = Math.round(fs.statSync(taglineBannerOutPath).size / 1024);
     console.log('    OK: ' + taglineMeta.width + 'x' + taglineMeta.height + ', ' + taglineTransparentCount + ' transparent pixels, ' + taglineFileSizeKB + ' KB');
+  } catch (err) {
+    console.error('    FAIL: ' + err.message);
+  }
+
+  // Build LinkedIn Company Page Banner with Tagline on soft-aqua background (4200×700)
+  console.log('\n  linkedin-company-banner-tagline-aqua.png...');
+  const aquaBannerSvg = generateLinkedInCompanyBannerTaglineAquaSVG();
+  const aquaBannerOutPath = path.join(ASSETS_DIR, 'latamscalers-linkedin-company-banner-tagline-aqua.png');
+  
+  try {
+    await sharp(Buffer.from(aquaBannerSvg, 'utf8'))
+      .png({ compressionLevel: 6, palette: false })
+      .toFile(aquaBannerOutPath);
+
+    const aquaMeta = await sharp(aquaBannerOutPath).metadata();
+    const aquaFileSizeKB = Math.round(fs.statSync(aquaBannerOutPath).size / 1024);
+    console.log('    OK: ' + aquaMeta.width + 'x' + aquaMeta.height + ', opaque background (teal-50), ' + aquaFileSizeKB + ' KB');
   } catch (err) {
     console.error('    FAIL: ' + err.message);
   }

@@ -77,6 +77,57 @@ async function testPngTransparency(pngPath, expectedWidth, expectedHeight, maxSi
   return true;
 }
 
+/**
+ * Test PNG for dimensions and file size only (for opaque background banners)
+ */
+async function testPngDimensions(pngPath, expectedWidth, expectedHeight, maxSizeKB, expectedBgColor) {
+  const filename = path.basename(pngPath);
+  console.log('\n  Testing: ' + filename);
+
+  if (!fs.existsSync(pngPath)) {
+    console.error('    FAIL: File not found');
+    return false;
+  }
+
+  const meta = await sharp(pngPath).metadata();
+  const { data } = await sharp(pngPath)
+    .ensureAlpha()
+    .raw()
+    .toBuffer({ resolveWithObject: true });
+
+  // Check dimensions
+  if (expectedWidth && meta.width !== expectedWidth) {
+    console.error('    FAIL: Width is ' + meta.width + ', expected ' + expectedWidth);
+    return false;
+  }
+  if (expectedHeight && meta.height !== expectedHeight) {
+    console.error('    FAIL: Height is ' + meta.height + ', expected ' + expectedHeight);
+    return false;
+  }
+
+  // Check file size
+  const fileSizeKB = Math.round(fs.statSync(pngPath).size / 1024);
+  if (maxSizeKB && fileSizeKB > maxSizeKB) {
+    console.error('    FAIL: File size is ' + fileSizeKB + ' KB, max allowed is ' + maxSizeKB + ' KB');
+    return false;
+  }
+
+  // Verify background color at corner (first pixel)
+  if (expectedBgColor) {
+    const r = data[0], g = data[1], b = data[2];
+    const hexColor = '#' + [r, g, b].map(x => x.toString(16).padStart(2, '0')).join('').toUpperCase();
+    if (hexColor !== expectedBgColor.toUpperCase()) {
+      console.error('    FAIL: Background color is ' + hexColor + ', expected ' + expectedBgColor);
+      return false;
+    }
+    console.log('    OK: ' + meta.width + 'x' + meta.height + ', background ' + hexColor + ', ' + fileSizeKB + ' KB');
+  } else {
+    console.log('    OK: ' + meta.width + 'x' + meta.height + ', ' + fileSizeKB + ' KB');
+  }
+  
+  return true;
+}
+
 async function main() {
   console.log('E2E Test: PNG Transparency\n');
 
@@ -102,6 +153,14 @@ async function main() {
   console.log('\n3. Testing LinkedIn Company Page Banner (Tagline)...');
   const taglineBannerPath = path.join(ASSETS_PNG, 'latamscalers-linkedin-company-banner-tagline-transparent.png');
   if (!await testPngTransparency(taglineBannerPath, 4200, 700, 3072)) {
+    allPassed = false;
+  }
+
+  // Test LinkedIn Company Page Banner with Tagline on Aqua background (4200×700, max 3MB = 3072KB)
+  console.log('\n4. Testing LinkedIn Company Page Banner (Tagline + Aqua Background)...');
+  const aquaBannerPath = path.join(ASSETS_PNG, 'latamscalers-linkedin-company-banner-tagline-aqua.png');
+  // Teal-50 background: #F0FDFA
+  if (!await testPngDimensions(aquaBannerPath, 4200, 700, 3072, '#F0FDFA')) {
     allPassed = false;
   }
 
