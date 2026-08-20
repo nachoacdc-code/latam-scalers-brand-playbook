@@ -91,10 +91,17 @@ async function main() {
     allPassed = false;
   }
 
-  // Test LinkedIn Company Page Banner (4200×700, max 3MB = 3072KB)
-  console.log('\n2. Testing LinkedIn Company Page Banner...');
+  // Test LinkedIn Company Page Banner with Logo (4200×700, max 3MB = 3072KB)
+  console.log('\n2. Testing LinkedIn Company Page Banner (Logo)...');
   const bannerPath = path.join(ASSETS_PNG, 'latamscalers-linkedin-company-banner-light-transparent.png');
   if (!await testPngTransparency(bannerPath, 4200, 700, 3072)) {
+    allPassed = false;
+  }
+
+  // Test LinkedIn Company Page Banner with Tagline (4200×700, max 3MB = 3072KB)
+  console.log('\n3. Testing LinkedIn Company Page Banner (Tagline)...');
+  const taglineBannerPath = path.join(ASSETS_PNG, 'latamscalers-linkedin-company-banner-tagline-transparent.png');
+  if (!await testPngTransparency(taglineBannerPath, 4200, 700, 3072)) {
     allPassed = false;
   }
 

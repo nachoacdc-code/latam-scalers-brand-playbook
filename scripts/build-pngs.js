@@ -58,6 +58,47 @@ function generateLinkedInCompanyBannerSVG() {
 </svg>`;
 }
 
+/**
+ * Generate SVG for LinkedIn Company Page banner with tagline only (4200×700, transparent)
+ * Tagline: "Your dedicated Creative team, on-demand"
+ */
+function generateLinkedInCompanyBannerTaglineSVG() {
+  const W = 4200;
+  const H = 700;
+  const centerX = W / 2;
+  const centerY = H / 2;
+  
+  // Font sizes optimized for 4200×700 banner - larger for better visibility
+  const mainFontSize = 96;
+  const accentFontSize = 96;
+  
+  const fontFace = `@font-face{font-family:Inter;font-style:normal;font-weight:300 700;font-display:swap;src:url(https://fonts.gstatic.com/s/inter/v18/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuLyfAZ9hjp-Ek-_EeA.woff2) format("woff2");}`;
+
+  // Brand colors
+  const midnight = '#0A1628';
+  const aqua = '#5EEAD4';
+
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}">
+  <defs>
+    <style type="text/css">${fontFace}</style>
+    <linearGradient id="textGrad" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="${midnight}"/>
+      <stop offset="100%" stop-color="${aqua}"/>
+    </linearGradient>
+  </defs>
+  <text x="${centerX}" y="${centerY}" 
+        font-family="Inter,Arial,sans-serif" 
+        text-anchor="middle" 
+        dominant-baseline="middle"
+        letter-spacing="-2"
+        font-size="${mainFontSize}">
+    <tspan font-weight="400" fill="${midnight}">Your dedicated</tspan>
+    <tspan font-weight="700" fill="url(#textGrad)"> Creative </tspan>
+    <tspan font-weight="400" fill="${midnight}">team, on-demand</tspan>
+  </text>
+</svg>`;
+}
+
 async function main() {
   console.log('Building transparent PNG logos (sharp/librsvg)...\n');
 
@@ -129,7 +170,7 @@ async function main() {
     console.log('    OK: ' + meta.width + 'x' + meta.height + ', ' + transparentCount + ' transparent pixels');
   }
 
-  // Build LinkedIn Company Page Banner (4200×700 transparent)
+  // Build LinkedIn Company Page Banner with Logo (4200×700 transparent)
   console.log('\n  linkedin-company-banner-light-transparent.png...');
   const bannerSvg = generateLinkedInCompanyBannerSVG();
   const bannerOutPath = path.join(ASSETS_DIR, 'latamscalers-linkedin-company-banner-light-transparent.png');
@@ -147,6 +188,28 @@ async function main() {
     }
     const fileSizeKB = Math.round(fs.statSync(bannerOutPath).size / 1024);
     console.log('    OK: ' + bannerMeta.width + 'x' + bannerMeta.height + ', ' + bannerTransparentCount + ' transparent pixels, ' + fileSizeKB + ' KB');
+  } catch (err) {
+    console.error('    FAIL: ' + err.message);
+  }
+
+  // Build LinkedIn Company Page Banner with Tagline only (4200×700 transparent)
+  console.log('\n  linkedin-company-banner-tagline-transparent.png...');
+  const taglineBannerSvg = generateLinkedInCompanyBannerTaglineSVG();
+  const taglineBannerOutPath = path.join(ASSETS_DIR, 'latamscalers-linkedin-company-banner-tagline-transparent.png');
+  
+  try {
+    await sharp(Buffer.from(taglineBannerSvg, 'utf8'))
+      .png({ compressionLevel: 6, palette: false })
+      .toFile(taglineBannerOutPath);
+
+    const taglineMeta = await sharp(taglineBannerOutPath).metadata();
+    const { data: taglineData } = await sharp(taglineBannerOutPath).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
+    let taglineTransparentCount = 0;
+    for (let j = 3; j < taglineData.length; j += 4) {
+      if (taglineData[j] < 255) taglineTransparentCount++;
+    }
+    const taglineFileSizeKB = Math.round(fs.statSync(taglineBannerOutPath).size / 1024);
+    console.log('    OK: ' + taglineMeta.width + 'x' + taglineMeta.height + ', ' + taglineTransparentCount + ' transparent pixels, ' + taglineFileSizeKB + ' KB');
   } catch (err) {
     console.error('    FAIL: ' + err.message);
   }
